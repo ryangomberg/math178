@@ -1,0 +1,218 @@
+\begin{flushleft}
+\section{Model Types and Algorithms}
+\textbf{1.1 \hspace{1mm} Supervised vs. Unsupervised Learning}\\
+\vspace{2mm}
+Supervised learning is often referred to as \textit{learning with training.} Given data $X, y$, we want to fit the mapping between $X$ and $y$ with training data and make predictions with the new $y$ given new $X$ in the test dataset. The ultimate goal is to minimize the distance between $\hat{y}$, the predicted value, and $y$.\\
+\vspace{2mm}
+Unsupervised learning is \text{learning without training.} This time, there is no response $y$ to be predicted. Instead, we \textit{explore} the pattern of data using methods such as clustering or dimension reduction.\\
+\vspace{2mm}
+\textbf{1.2 \hspace{1mm} Regression vs. Classification}\\
+\vspace{2mm}
+In supervised machine learning models, regression is often used with numerical data and classification is used with categorical data (consists of multiple classes or levels).\\
+\vspace{2mm}
+\textbf{1.3 \hspace{1mm} Parametric vs. Non-parametric models}\\
+\vspace{2mm}
+\textit{Parametric} machine learning models assume that the function can be modeled in a functional form and follows a procedure to \textit{fit} and \textit{train} the model. In linear regression, the functional form is a linear combination of unknown parameters and our predictors.\\
+\vspace{2mm}
+\textit{Non-parametric} machine learning algorithms, in contrast, does not explicitly assume a functional form is possible and limits the need for finding parameters. Instead, it uses patterns and trends in existing training data to predict results in the test data. The K-nearest neighbors algorithm is just one example. Test points are compared to a set amount of training data points that are closest, or similar, to it.\\
+\vspace{2mm}
+\textbf{1.4 \hspace{1mm} Measuring accuracy in machine learning models}\\
+\vspace{2mm}
+The standard measurement of accuracy is computing the mean squared error (MSE). If $y_i$ and $x_i$ are observations in training data and $\hat{f}$ is the \textit{function} described by the model, then
+$$\text{Training MSE} = \frac{1}{n} \sum_{i = 1}^{n} \left(y_i - \hat{f}(x_i)\right)^2.$$
+This is the function to be minimized. Note that we write $y_i = \hat{f}(x_i) + \varepsilon_i$, where $\varepsilon_i$ is the error/noise caused by $x_i$. The MSE for the test data can be expressed as
+$$\text{Test MSE} = E[\varepsilon^2] + \underbrace{\left(f(x_0) - E_{x_i, \varepsilon}[\hat{f}(x_0)] \right)^2}_{\text{Bias}(\hat{f}(x_0))} + \underbrace{E_{x_i, \varepsilon}\left[\hat{f}(x_0) - E_{x_i, \varepsilon}[\hat{f}(x_0)]\right]^2}_{\text{Var} (\hat{f}(x_0))}.$$
+\pagebreak
+Here we use properties of expectations from probability theory. The above equation is merely showing that the test MSE is a sum of the bias, variance, and random error (often negligible).
+\begin{itemize}
+\item{\textbf{Bias} is the error introduced by making assumptions to simplify the learning process. For example, using a linear model to a dataset with a nonlinear relationship is will have high bias, for it is trying to simplify but does not fit the model. This is \textit{underfitting}.}
+\item{\textbf{Variance} is the error caused by small fluctuations in the model's test data. A model with high variance will not only capture the patterns in the training data, but the noise as well. This is \textit{overfitting.} High variance models work well with training data but poorly on new test data.}
+\end{itemize}
+\vspace{2mm}
+Combining these two factors is what we know as the \textbf{Bias-Variance Tradeoff}. Increasing the bias of a linear model lowers the variance, and vice versa. Generally, we want to strike a balance between the two factors that will minimize the test MSE.\\
+\vspace{2mm}
+\textbf{1.5 \hspace{1mm} Flexible vs. Inflexible Models}\\
+\vspace{2mm}
+\textit{Flexible} models are often used to capture more complex relationships, such as decision trees or high degree polynomial regression. They can readily adapt to changes in data (i.e. new training/test data). Flexible models are more prone to overfitting and consequently having high variance.\\
+\vspace{2mm}
+\textit{Inflexible} models follow a rigid, functional form that cannot capture complex patterns in data and assume a rigid, predefined relationship between inputs and outputs. Flexible models tend to have more bias and succumb to underfitting.\\
+\vspace{2mm}
+\textbf{1.6 \hspace{1mm} K-Nearest Neighbors (KNN) Algorithm}\\
+\vspace{2mm}
+The K-Nearest Neighbors method is a supervised learning algorithm that makes predictions based on how \textit{similar} new data points are to existing data. We compute the Euclidean distance between the test data point and all of the observed data, then choosing $k$ of the existing points that are closest in distance.\\
+\vspace{2mm}
+\begin{itemize}
+\item{In a classification setting, the majority class among the $k$ neighbors determines the predicted class.}
+\item{In a regression setting, the predicted value is the average of the values of the $k$ neighbors.}
+\end{itemize}
+$k$ is what we call a \textit{hyperparamter}, or tuning parameter; it does not depending on the training process. As we increase $k$, the flexibility of the algorithm increases. If we choose too many neighbors, we may observe overfitting and misleading predictions.\\
+\vspace{2mm}
+\textbf{1.7 \hspace{1mm} Normal Equation for Linear Regression}\\
+\vspace{2mm}
+Recall that a linear model with $p$ predictors is approximated by
+$$\hat{f}(x) = c_0 + c_1 x_1 + c_2 x^2 + \cdot \cdot \cdot c_p x^p.$$
+Where $c_0, \cdot \cdot \cdot, c_p$ are unknown parameters. We want to find these parameters in a way that will minimize the error
+$$\min_{\overline{w}} \sum_{i = 1}^n y_i - \hat{f}(x_i).$$
+$\overline{w}$ is just the set of parameters we want to solve for in the above problem. Recall that with higher degree polynomial regression (degrees of freedom > 2), it is nonlinear with respect to $x$ but it is linear with respect to the parameters. Hence, we can apply methods from linear algebra to solve the optimization problem. The most common approach is through \textit{gradient descent}, for which we take partial derivatives of each parameter and iterate until we find the minimum. The solution is given by the \textbf{normal equation}:
+$$\widehat{W} = \left(M^T M\right)^{-1} M^T \overrightarrow{Y}.$$
+If $n$ is the number of observations in our training data, then $M$ is a $n \times (p + 1)$ matrix containing the intercept terms (column of 1s) and the predictors in our training data. $\overrightarrow{Y}$ is a $n \times 1$ vector consisting of the response values in our training data.\\
+\vspace{5mm}
+\textbf{Degrees of freedom}: The number of independent terms used to fit the data. A polynomial of degree $p$ has degree of freedom $= p + 1$ (remember to include the intercept term). It is simply another measurement of flexibility to fit the data. \\
+\vspace{5mm}
+\textbf{Gradient descent problem}
+$$\min_{\overrightarrow{c}} \phi(\overrightarrow{c}) = \min_{\overrightarrow{c}} ||\overrightarrow{y} - X\overrightarrow{c}||^2.$$
+\pagebreak
+\section{Classification and Generative Models}
+Previously, we assumed that we can fit a model $y = f(x) + \varepsilon$, where $\varepsilon$ does not depend on $x$. Now, suppose we let the error also depend on $x$. Then, $y = f(x) + \varepsilon (x)$. We say that $f(x)$ is deterministic and $\varepsilon(x)$ is a random variable. The main objective is to find
+$$p(y, x) \approx P(Y = y \hspace{1mm} | \hspace{1mm} X = x)$$
+or, that approximation of a model relative to the probability that it predicts $y$ given $x$. For the models in this section, we assume that the $Y$ is a discrete random variable to avoid complications.\\
+\vspace{3mm}
+\textbf{2.1 \hspace{1mm} Maximum Likelihood Estimation}\\
+\vspace{2mm}
+We proceed by using a standard logistic regression model. Assume that we are given data $(\overrightarrow{x_i}, y_i)$, where $Y$ can take on two classes: $A$ or $B$. Our goal is to have our model $\hat{p}$ roughly estimate the probability that each outcome occurs. A standard linear regression model would argue that we can approximate in the form $Y = \beta_0 + \beta_1 X$. However, this can quickly violate our goal! Recall that our objective function is a probability function, so the range of values must be $0 < P(Y = y \hspace{1mm} | \hspace{1mm} X = x) < 1$. This is where we introduce logistic regression: a model that takes on the form
+$$\hat{p} (Y \in A \hspace{1mm} | \hspace{1mm} X = x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}.$$
+This so-called \textit{standardized} form alleviates the negativity issue and forces all outputs to be within 0 and 1. Now that we have developed a probability function, we hit another wall. How can we ensure that we achieve, or get close to, the observations $(\overrightarrow{x_i}, y_i)$ under our new model? The idea is to \textit{maximize} the probability that we get said observations. This is where we introduce the \textbf{likelihood function}:
+$$\mathcal{L}\left(\beta_0, \overrightarrow{\beta}\right) = \prod_{i = 1}^n P(Y = y_i \hspace{1mm} | \hspace{1mm} X = x_i) = \begin{cases}
+\hat{p}(x) & \text{ when } y \in A\\
+1 - \hat{p}(x) & \text{ when } y \in B\\
+\end{cases}$$
+where $n$ observations are given and assumed that each observation is independent and $\beta_0, \overrightarrow{\beta}$ contains the coefficients $\beta_1, \cdot \cdot \cdot, \beta_n$. We can rewrite this as the product of probabilities that an observation falls into each class:
+$$\mathcal{L}\left(\beta_0, \overrightarrow{\beta}\right) = \prod_{i: y_i \in A} \hat{p} (x_i) \prod_{i: y_i \in B} (1 - \hat{p}(x_i)). $$
+Finding such $\beta_0, \overrightarrow{\beta}$ that maximizes $\mathcal{L}$ is the \textbf{Maximum Likelihood Estimator (MLE)}.
+\pagebreak
+\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
+\begin{example}
+	Suppose we are given a fair die and we roll it four times with the observed outcomes 5, 2, 3, 		6. Let $\theta$ be the probability of rolling a 3. What is the Maximum Likelihood Estimation 		for $\theta$?
+\end{example}
+Let $P(3) = \theta$ and $P(\text{Not } 3) = 1 - \theta$. Then,
+$$f(\theta) = \theta(1 - \theta)^3.$$
+We take the natural log of $f$, differentiate, and set equal to zero to find the corresponding $\theta$:
+$$\ln (f(\theta)) = \ln (\theta) + 3\ln(1 - \theta) \Longrightarrow \frac{d}{d\theta} \ln (f(\theta)) = \frac{1}{\theta} + \frac{3}{1 - \theta} = 0 \Longleftrightarrow \theta = \frac{1}{4}.$$ 
+One could argue that this is indeed the maximum through the second derivative test.
+\end{tcolorbox}
+\vspace{3mm}
+\textbf{2.2 \hspace{1mm} Maximum A Posteriori (MAP) Estimation}\\
+\vspace{2mm}
+Recall Bayes' Formula from probability theory. If $A$ and $B$ are both events, each assigned their own probability, then the conditional probability
+$$P(A | B) = \frac{P(A) P(B | A)}{P(B)}.$$
+Here $P(A | B)$ is the \textit{posterior probability}, or the probability obtained after we take our data into consideration. $P(A)$ is the \textit{prior}, or the probability before we take our data into consideration. If we are given prior knowledge or data, then we can try to \textit{maximize} Bayes' Theorem, or the posterior probability. If $\theta$ is the parameter of interest and $X$ is our observed data, then
+$$\underset{\theta}{\text{argmax}} \hspace{1mm} P(X | \theta) P(\theta). $$
+This is the \textbf{Maximum A Posteriori Estimation}. Since we are maximizing with respect to $\theta$, we treat $P(X)$ as a constant and can ignore it.\\
+\vspace{2mm}
+\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
+\begin{example}
+	Use the same setup from the previous example. Given the priors 0.8, 0.45, 0.1, 0.04 for $		\theta = $ 0.5, 0.3, 0.7, 0.6 respectively, compute the Maximum A Posteriori Estimation for $\theta$.  
+\end{example}
+Compute the posteriori for each prior $\theta$ (where $P(X | \theta) = f(\theta)$ from past example) and determine which is the largest:\\
+$\theta = 0.5 \Longrightarrow (0.5)^4 (0.8) \approx 0.08$\\
+$\theta = 0.3 \Longrightarrow 0.3(0.7)^3 (0.45) \approx 0.0463$\\
+$\theta = 0.7 \Longrightarrow 0.7(0.3)^3(0.1) \approx 0.00189$\\
+$\theta = 0.6 \Longrightarrow 0.6(0.4)^3 (0.04) \approx 0.001536$\\
+The Maximum A Posteriori is therefore 0.08 for when $\theta = 0.05$.
+\end{tcolorbox}
+\vspace{2mm}
+Similar to MLE, we can compute MAP by taking the natural log and differentiating to easily obtain the maximum.\\
+\vspace{2mm}
+For logistic models, we choose an objective MLE (not MAP!) function, optimize, and apply new inputs to predict new samples $\hat{p}\left(Y | \overrightarrow{X} = X_0\right)$ directly.\\
+\vspace{3mm}
+\textbf{2.3 \hspace{1mm} Generative Models: Naive Bayes, LDA, QDA}\\
+\vspace{2mm}
+Compared to logistic regression, generative models are used to learn how the data itself is distributed through training the data and then testing the model on new data. Hence, they aim to learn the joint probability distribution $P(X, Y)$ (supervised case) or $P(X)$ (unsupervised case). For now, we focus on three generative models: Naive Bayes and Linear/Quadratic Discriminant Analysis.\\
+\vspace{2mm}
+As given by its name, the Naive Bayes' algorithm is derived from Bayes' formula. For Naive Bayes, the underlying assumption is that the observations in \textit{each class} is independent of each other. Thus, we apply the basic law of probability $P(A \cap B) = P(A)P(B)$. Let $\overrightarrow{X}$ be the vector containing our features and let $\left(X^j | Y = k \right)$ be the $j$-th observation in the $k$-th class. Then, the Naive Bayes' formula is given as
+$$\hat{p}\left(\overrightarrow{X} | Y = k \right) = \prod_j \hat{p}\left(X^j \hspace{1mm} | \hspace{1mm} Y = k \right).$$
+The expression itself says that the probability that a sample falls into a class is computed as the product of probabilities for each feature within that class. We also say that this conditional probability is directly proportional to the prior of the class. Generally, Naive Bayes is put to quick use for simple classification problems, such as spam/fraud detection, or recommendation systems.\\
+\pagebreak
+Now, we consider two other algorithms that rely on a different distribution than Naive Bayes. To motivate this idea, we once again consider Bayes' Theorem. Suppose we are given data $\underset{ i = \lbrace 1, \cdot \cdot \cdot, N \rbrace}{\lbrace (x_i, y_i) \rbrace}$ and we want to classify $x_0$ into $k$ classes. Then we compute
+$$P[Y = k | X = x] = \frac{P[Y = k]P[X = x | Y = k]}{P[X = x]}.$$
+Suppose we cannot assume that the observations in each class are independent. \\
+\vspace{1mm}
+\begin{itemize}
+\item{We know how to compute $P[Y = k]$ within a dataset.\\
+\vspace{1mm}}
+\item{How do we find $P[X = x | Y = k]?$}
+\end{itemize}
+\vspace{2mm}
+While there is no definitive answer, the easiest (and most used) approach is to make an assumption about the type of distribution that it follows. Let $P[X = x | Y = y] = f_k (x)$ and say that $f_k(x)$ follows a normal Gaussian distribution with mean $\mu_k$ (mean parameter for $k$-th class) and variance $\sigma_k^2$ (variance for $k$-th class). Then, 
+$$f_k (x) = \frac{1}{\sqrt{2\pi} \sigma_k} e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}.$$
+We can summarize the behavior of this distribution by writing $f_k (x) \sim \mathcal{N}\left(\mu_k, \sigma_k^2 \right).$\\
+\vspace{2mm}
+As for $P[X = x]$, we multiply the probability that an observation lies in the $l$-th class (for $1 \leq i \leq k$) by the probability that $X$ takes on a certain outcome $x$ given that it is in the $l$-th class. Then, you sum this across all $k$ classes. Mathematically, this is expressed as
+$$P[X = x] = \sum_{l = 1}^{k} P[Y = l] P[X = x | Y = l] \hspace{5mm} \text{(weighted average)}.$$
+Before proceeding, let us clean up with some more notation. Let $p_k (x) = P[Y = k | X = x]$ and $\pi_k = P[Y = k]$ (prior). Notice how we can rewrite $P[X = x]$ using normal distributions as well:
+$$P[X = x] = \sum_{l = 1}^k \pi_l \cdot \frac{1}{\sqrt{2\pi} \sigma_l} e^{\frac{(x - \mu_l)^2}{2\sigma_l^2}}.$$
+This enables us to obtain the final form of $p_k(x)$:
+$$p_k(x) = \frac{\pi_k \cdot \frac{1}{\sqrt{2\pi} \sigma_k} e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}}{\sum_{l = 1}^k \pi_l \cdot \frac{1}{\sqrt{2\pi} \sigma_l} e^{\frac{(x - \mu_l)^2}{2\sigma_l^2}}}.$$
+\\
+\pagebreak
+Now that we have a closed-form expression, we want to optimize it. That is to say, we want to maximize the posterior probability, or probability that we put a sample in the $k$-th class given the features in $X$. Once again, logarithms come to the rescue! Define $\delta_k (x) = \ln (p_k(x))$. Then,
+$$\delta_k (x) = -\frac{1}{2\sigma_k} \left(x - \mu_k \right)^2 + \ln(\pi_k) + \ln \left(\frac{1}{\sqrt{2\pi} \sigma_k} \right).$$
+We seek to find the $k$ that solves the optimization problem
+$$\underset{k \in \lbrace 1, \cdot \cdot \cdot, K \rbrace}{\text{argmax}} \hspace{1mm} \delta_k (x).$$
+This algorithm is called \textbf{Quadratic Discriminant Analysis (QDA)}, namely because $\delta_k (x)$ is quadratic in $x$. QDA uses the assumption that the variance for each class is different. If we assume a constant variance across all $K$ classes, then we can eliminate some terms. So, under the assumption $\sigma_1^2 = \sigma_2^2 = \cdot \cdot \cdot = \sigma_k^2 = \sigma^2$:
+$$\underset{k \in \lbrace 1, \cdot \cdot \cdot, K \rbrace}{\text{argmax}} \hspace{1mm} -\frac{1}{2\sigma^2} (x - \mu_k)^2 + \ln(\pi_k) = -\frac{x^2}{\sigma^2} + \frac{2x\mu_k}{\sigma^2} - \frac{\mu_k^2}{\sigma^2} + \ln(\pi_k).$$
+Note that the first term does not depend on $k$, so we treat it as a constant and drop it. Therefore, we have
+$$\underset{k \in \lbrace 1, \cdot \cdot \cdot, K \rbrace}{\text{argmax}} \hspace{1mm} \frac{2x\mu_k}{\sigma^2} - \frac{\mu_k^2}{\sigma^2} + \ln(\pi_k).$$
+This form is called \textbf{Linear Discriminant Analysis (LDA)} because it is linear in $x$. Therefore, LDA is a reduced form of QDA if we want to make the simplifying assumption of constant variance.\\
+\vspace{2mm}
+We can shift perspectives into rewriting both forms using matrices. For simplicity, we omit the derivation and write its closed-form expression. Let $\mu_k$ be the sample mean vector in the $k$-th class, $X$ be the feature vector in class $k$, and $\Sigma_k$ be the covariance matrix of the $k$-th class. Then,
+$$\hat{p}\left(X = \overrightarrow{x} | Y = k \right) = \frac{1}{\sqrt{2\pi} |\hat{\Sigma}_k|^{0.5}} e^{-\frac{1}{2}(x - \hat{\mu}_k)^T \hat{\Sigma}_k^{-1} (x - \hat{\mu}_k)}.$$
+The closed form optimization function is (at $\overrightarrow{x} = \overrightarrow{x}_0$):
+$$\underset{k}{\text{argmax}} \hspace{1mm} \ln(\hat{\pi}_k) - \frac{1}{2} \ln \left|\hat{\Sigma}_k \right| + \frac{1}{2} \overrightarrow{x}_0^T \hat{\Sigma}_k^{-1}\overrightarrow{x}_0 + \overrightarrow{x}_0^T \hat{\Sigma}_k^{-1} \overrightarrow{\mu}_k - \frac{1}{2} \overrightarrow{\mu}_k^T \hat{\Sigma}_k^{-1} \overrightarrow{\mu}_k.$$
+Recall that $\overrightarrow{x}_0^T \hat{\Sigma}_k^{-1}\overrightarrow{x}_0$ is a quadratic form, which is therefore the QDA in vector/matrix form. In LDA, the second and third terms will cancel since we assume that the covariance matrix $\Sigma$ is uniform across all classes and so those terms will no longer depend on $k$.\\
+Here we think of the covariance matrix as how strong one feature is correlated to another (non-diagonal elements) and the spread of each feature (variance). For QDA we assume that the correlation between features between classes and for LDA we assume that they are the same between classes.\\
+\vspace{2mm}
+Some closing thoughts about LDA vs. QDA:\\
+\vspace{1mm}
+\begin{itemize}
+\item{If we are concerned about the number of parameters used, then LDA is better, for QDA requires roughly $k$ times the number of parameters compared to LDA.\\
+\vspace{1mm}}
+\item{QDA is more flexible than LDA. If we think about the assumptions, LDA requires us to assume constant variance whereas QDA does not. As always, flexible models are more likely to overfit test data, so we once again need to determine the true pattern of the data.\\
+\vspace{1mm}}
+\item{QDA is better than LDA if we have a large sample size and relatively small number of predictors. The approximation for each covariance matrix will smooth out and generally be more precise (lower variance). LDA will have more trouble here because it wants to find a uniform covariance matrix across all classes, which will be harder to estimate with the large sample size. If the true covariance matrices of each class differ significantly, then there will be large bias for LDA's uniform covariance matrix assumption. LDA ultimately forces to treat every class as having the same spread and relationship relative to each other. In low dimensional data, LDA becomes too restrained.}
+\end{itemize}
+\vspace{2mm}
+\textit{Brief Aside}: using Bayes' Theorem and notation $\pi_k, f_k, p_k$, the Gaussian Naive Bayes is written as 
+$$p_k (x) = \frac{\pi_k f_{k_1}(x_1) \cdot \cdot \cdot f_{k_p}(x_p)}{\sum_{l = 1}^k \pi_l f_{l_1}(x_1) \cdot \cdot \cdot f_{l_p} (x_p)}.$$
+For example, if we wanted to determine the number of parameters required for Naive Bayes, we would need $k$ priors plus $2pk$ since $f_{k_i}$ has $p$ parameters and $k$ classes.\\
+
+\vspace{3mm}
+\textbf{2.4 \hspace{1mm} Decision Boundaries}\\
+\vspace{2mm}
+Simply put, decision boundaries is what really defines classification models; it is how we separate classes from each other. In general, describing decision boundaries for LDA/QDA are straightforward:\\
+\vspace{1mm}
+\begin{itemize}
+\item{The decision boundaries in LDA are linear. That is to say, the boundaries separating each class are straight lines.\\
+\vspace{1mm}}
+\item{The decision boundaries in QDA are quadratic. That is to say, the boundaries separating each class are parabolic.\\
+\vspace{1mm}}
+\item{The decision boundaries in Naive Bayes are, in most cases, moderately non-linear.\\
+\vspace{1mm}}
+\item{The decision boundaries in logistic regression are the same as LDA, but they are computed in different ways.}
+\end{itemize}
+If the decision boundary is complex (in which it cannot be generated by the above algorithms), then we resort to a non-parametric method. We will look at kNN in particular:
+\end{flushleft}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{kNNboundary}
+\end{center}
+\begin{flushleft}
+Suppose we want to put $\overrightarrow{x}$ into a class using its two nearest neighbors $\overrightarrow{x_1}$ and $\overrightarrow{x_3}.$ We want to find the region that is closest to both neighbors, which in this case is the region shaded in blue. Therefore, we would put $\overrightarrow{x}$ into the blue class over the red class.\\
+\vspace{2mm}
+The regions are generated by \textit{splitting} the plane in half between pair of observations. While the above example doesn't fully live up to that, the intuition is hopefully there. Another example exhibits the difference of predicted region depending on number of neighbors used (1 or 2).
+\end{flushleft}
+\begin{center}
+\includegraphics[width=0.52\textwidth]{knn2}
+\end{center}
+\begin{flushleft}
+\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
+\begin{example}
+
+\end{example}
+\end{tcolorbox}
+\pagebreak
+\section{Resampling Methods}
+YEP
+\\
+\pagebreak
+\section{Neural Networks, Deep Learning}
+\end{flushleft}
