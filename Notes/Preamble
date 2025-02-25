@@ -1,0 +1,29 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{lipsum}    
+\usepackage{nicematrix}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newtheorem{example}{Example}[section]
+\usepackage{tzplot}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{arrows,calc,patterns}
+\usepackage{newpxtext,newpxmath}
+\graphicspath{ {./Math 178/} }
+\begin{document}
+\setlist{nolistsep,leftmargin=*}
+\pagestyle{fancy}
+\fancyhead[L]{Ryan Gomberg}
+\fancyhead[C]{Math 178 (Mathematical Machine Learning) Notes}
+\fancyhead[R]{Page \thepage \hspace{0.2mm} of 13}
