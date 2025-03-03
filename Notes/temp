@@ -1,0 +1,138 @@
+\documentclass[11]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{mathpazo}
+\usepackage{amssymb,amsthm}
+\usepackage[fleqn]{amsmath}
+\usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[breakable,theorems,skins]{tcolorbox}
+% \usepackage{multirow}
+\usepackage[all]{xy}
+
+%lengths & spacing
+\allowdisplaybreaks
+\unitlength 1cm
+\textheight 22cm
+\textwidth 17cm
+\oddsidemargin -0.5cm
+\evensidemargin -0.5cm
+\topmargin -1.5cm
+\topskip 0cm
+\headheight 0.5cm
+\headsep 1cm
+%\marginparwidth 1.2cm
+\newlength\doubleind
+\addtolength{\doubleind}{\leftmargini}
+\addtolength{\doubleind}{\leftmarginii}
+\parindent 0pt
+\def\lstsp{\hspace{\labelsep}}
+
+\def\exstart{\hangindent\leftmargini\textup{1.}\hspace{\labelsep}}
+
+\newcommand\boldinline[1]{\paragraph{#1}}
+\newcommand\boldsubsection[1]{\subsection*{#1}}
+\newcommand\boldsubsubsection[1]{\subsubsection*{#1}}
+
+
+                      
+\newenvironment{enumeratea}{
+	\begin{enumerate}
+	  \renewcommand{\labelenumi}{(\alph{enumi})}}
+	{\end{enumerate}}
+
+
+%Theorems
+\tcbset{
+	defstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt, left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, colback=blue!7!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{orange!75!white}},
+	thmstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=green!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exercisestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \ \ }},
+	proofstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{green!50!white}},
+	asidestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{black!50!white}},
+	exercisestyle2/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesubsection.\ \ \ }},
+	exercisestyle4/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesection.\ \ \ }},
+	exercisestyle3/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercise\quad}},
+	conjstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=red!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	}
+
+\tcolorboxenvironment{proof}{breakable,proofstyle}
+
+\newtcbtheorem[number within=section]{defn}{Definition}{defstyle}{defn}
+\newtcbtheorem[use counter from=defn]{example}{Example}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{examples}{Examples}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{thm}{Theorem}{thmstyle}{thm}
+\newtcbtheorem[use counter from=defn]{lemm}{Lemma}{thmstyle}{lemm}
+\newtcbtheorem[use counter from=defn]{cor}{Corollary}{thmstyle}{cor}
+\newtcbtheorem[use counter from=defn]{axiom}{Axiom}{defstyle}{axiom}
+\newtcbtheorem[use counter from=defn]{axioms}{Axioms}{defstyle}{axioms}
+\newtcbtheorem[use counter from=defn]{conj}{Conjecture}{conjstyle}{conj}
+
+\newtcolorbox{aside}{asidestyle}
+\newtcolorbox{exercises*}{exercisestyle}
+\newtcolorbox{exercises}{exercisestyle2}
+\newtcolorbox{exercisessec}{exercisestyle4}
+\newtcolorbox{exercise}{exercisestyle3}
+
+\begin{document}
+
+\section{Resampling Methods}
+
+The process we have streamlined thus far has been to build a model, train it on existing data (choose objective function and optimize), and then test it on new data. So far, we have assumed that one set of training and test data is sufficient. What if we want, given a fixed amount of data, many sets of train and test data? We refer to this as \textit{resampling}, or generating different samples of training data to get a better understanding of how our models hold up. For example, if we have 100 observations, we could generate 20 sets of (90 training data, 10 test data) models, and see how they compare to each other. Recall from earlier that, given a model $f(x)$ with predicted value and observed value, $f(x_0), y$, 
+
+$$\text{Test Error } = E_{\varepsilon, \text{ train}}\left[y - \hat{f}(x_0)\right]$$
+
+We applied this to a single set of test data. Partitioning our training just once is wasteful; we are not using the available data to its maximum capacity! This is the motivation for resampling methods.\\
+\vspace{1mm}
+There are two general approaches to resampling:
+\vspace{1mm}
+\begin{itemize}
+\item{Pretend there is no separated test data. Instead, choose different training and test sets, out of the entire data, in each sample.\\
+\vspace{1mm}}
+\item{Ignore the initial set of test. Within the training data, partition into new subsets of training and test data. Then, validate on the initial set of test data}
+\end{itemize}
+
+Validating our data really means that we want to \textit{test} the performance of our model, generated by the subsets of training data, on the subsets of test data before using the ``real" test data. This is a way of using observations as a preliminary test before generalizing a model to unseen data.\\
+\vspace{1mm}
+In the following sections, we will discuss three methods of resampling, which approach they fall into, and dive into their cost-benefit trade-off.
+
+\subsection{Leave One Out Cross Validation}
+Suppose we are given a dataset with $N$ observations. The Leave One Out Cross Validation (LOOCV) method constructs $N$ \textit{folds}, or samples, each containing $N - 1$ training data. The remaining observation is the test data. The accuracy is measured by averaging the performance of the $N$ models.
+\begin{center}
+
+\end{center}
+
+\begin{flushleft}
+The blue rectangles indicate the set of data we are training, and the red rectangle is the singular test data. \\
+\vspace{1mm}
+With the large amount $(N)$ of models generated by LOOCV, the accuracy will be more promising compared to other methods because we are using all $N$ observations in each fold, utilizing the data to its full potential. The model works well in practice; however, the computational cost grows significantly as the number of observations increases. Therefore, this method is typically avoided with large datasets and used for when $N$ is small.\\
+\vspace{1mm}
+
+\subsection{K-Fold Cross Validation}
+$K$-Fold validation relaxes the restrictions imposed on partitioning data. Instead of generating $N$ models, we partition the training data into $k < N$ groups. For each group, or fold, we train on $k - 1$ groups and test on the remaining group. This is performed $k$ times to ensure each group is the test data one time. \\
+\end{flushleft}
+\vspace{1mm}
+\begin{center}
+
+\end{center}
+
+\begin{flushleft}
+The figure shown above performs a 5-fold cross validation $(k = 5)$. First, we partition our entire dataset into training and test data, which will be kept aside for now. For the time being, we operate on the training data by splitting it into 5 equal folds. In the first iteration, we let \textcolor{blue}{folds 2$-$5} be the training data and then test the new-found model on \textcolor{red}{fold 1}. We iterate four more times until each fold has been used as test data. Then, we compute the average performance across the 5 folds $(\overline{a})$. Then, we generate a model on the entire training set (combining all 5 folds) and then test on the data we set aside earlier.\\
+\vspace{2mm}
+Typically, to lessen computational cost, $k = 5$ or $k = 10$ are reasonable choices. \\
+\vspace{2mm}
+$K$-Fold Cross Validation is a great resampling method; it efficiently takes advantage of training data before using any test data. Ultimately, we will get an idea of our model will perform before applying it on new, unseen data.\\
+
+\subsection{Bootstrapping}
+Compared to the other two approaches, bootstrapping takes on a more general philosophy. We generate $k$ subsets of our observation data, each containing $n$ data points, and apply it on unseen data.
+\end{flushleft}
+\begin{center}
+
+\end{center}
+\begin{flushleft}
+Suppose our data has 25 observations. The bootstrapping method applied here takes 3 subsets of observation data, each containing 20 data points.  
+\end{flushleft}
+
+\end{document}
