@@ -127,13 +127,37 @@ Suppose $x^{(1)}$ and $x^{(2)}$ are two predictors and $t_1, t_2, t_3, t_4$ are 
 \begin{itemize}
 \item{$R_1: x^{(1)} < t_1, x^{(2)} < t_2$}
 \item{$R_2: x^{(1)} < t_1, x^{(2)} \geq t_2$}
-\item{$R_3: x^{(2)} \geq t_1, x^{(2)} < t_3$}
-\item{$R_4: x^{(2)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} < t_4$}
-\item{$R_5: x^{(2)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} \geq t_4$}
+\item{$R_3: x^{(1)} \geq t_1, x^{(2)} < t_3$}
+\item{$R_4: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} < t_4$}
+\item{$R_5: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} \geq t_4$}
 \end{itemize}
 Draw the corresponding decision tree and regions in the $x$-plane.
 \end{example}
-
-In theory, region can have any shape, but we use rectangles for simplicity and ease of interpretation
+\begin{example}{}{db2}
+This time, change $R_3, R_4, R_5$ such that
+\begin{itemize}
+\item{$R_3: x^{(1)} \geq t_1, x^{(1)} < t_3$}
+\item{$R_4: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} < t_4$}
+\item{$R_5: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} \geq t_4$}
+\end{itemize}
+What is the new decision tree and region distribution in the $x$-plane?
+\end{example}
+In theory, region can have any shape, but we use rectangles for simplicity and ease of interpretation.\\
+\vspace{2mm}
+The general procedure for generating decision trees and boundaries follow: 
+\begin{enumerate}
+\item{Divide the predictor space into $J$ distinct and nonoverlapping regions $R_1, ..., R_J$.}
+\item{For every observation that falls into the same region, we make the same prediction\\
+Regression $-$ Average the training observations in that region\\
+Classification $-$ Majority vote of the training observations in that region}
+\item{Find $R_1, \cdot \cdot \cdot, R_J$ that minimize the residual sum of squared error (RSS)
+$$\text{RSS} = \sum_{j = 1}^J \sum_{i \in R_j} \left(y_i - \overline{y}_{R_j} \right)^2 $$
+where $\overline{y}_{R_j}$ is the mean response for the region $R_j$.}
+\end{enumerate}
+In more complex cases, it may not be feasible to check all possible combinations of regions. So, we may just optimize for one split. At the splitting step, pick a random predictor $X_j$ and a cutoff point $S$, and we split into two groups
+$$R_1 ^{(j, s)} = \lbrace x | x_j < s \rbrace , \hspace{5mm} R_i^{(j, s)} = \lbrace x | x_j \geq s \rbrace$$
+Then, we minimize
+$$\sum_{i: x_i \in R_ (j, s)} (y_i - \hat{y} R_i )^2 + \sum_{i: x_i \in R_2 (j, s)} (y_i - \hat{y}R_2 )^2$$
+This is called \textit{recursive learning splitting}.
 \end{flushleft}
 \end{document}
