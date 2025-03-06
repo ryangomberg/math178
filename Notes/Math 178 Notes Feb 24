@@ -1,3 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[fleqn]{amsmath}
+\usepackage[svgnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{dsfont}
+\usepackage{lipsum}    
+\usepackage{nicematrix}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[breakable,theorems,skins]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{multirow}
+\usepackage[all]{xy}
+\usepackage{tzplot}
+\usepackage{caption}
+\usepackage{pgfplots}
+\usepackage{chngcntr}  
+\usepackage{placeins}
+
+\definecolor{purp}{HTML}{961CEB}
+
+\def\exstart{\hangindent\leftmargini\textup{1.}\hspace{\labelsep}}
+
+\newcommand\boldinline[1]{\paragraph{#1}}
+\newcommand\boldsubsection[1]{\subsection*{#1}}
+\newcommand\boldsubsubsection[1]{\subsubsection*{#1}}
+ 
+\newenvironment{enumeratea}{
+	\begin{enumerate}
+	  \renewcommand{\labelenumi}{(\alph{enumi})}}
+	{\end{enumerate}}
+
+
+%Theorems
+\tcbset{
+	defstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt, left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, colback=blue!7!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{orange!75!white}},
+	thmstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=green!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exercisestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \ \ }},
+	proofstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{green!50!white}},
+	asidestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{black!50!white}},
+	exercisestyle2/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesubsection.\ \ \ }},
+	exercisestyle4/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesection.\ \ \ }},
+	exercisestyle3/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercise\quad}},
+	conjstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=red!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	}
+
+\tcolorboxenvironment{proof}{breakable,proofstyle}
+
+\newtcbtheorem[number within=section]{defn}{Definition}{defstyle}{defn}
+\newtcbtheorem[use counter from=defn]{example}{Example}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{examples}{Examples}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{thm}{Theorem}{thmstyle}{thm}
+\newtcbtheorem[use counter from=defn]{lemm}{Lemma}{thmstyle}{lemm}
+\newtcbtheorem[use counter from=defn]{cor}{Corollary}{thmstyle}{cor}
+\newtcbtheorem[use counter from=defn]{axiom}{Axiom}{defstyle}{axiom}
+\newtcbtheorem[use counter from=defn]{axioms}{Axioms}{defstyle}{axioms}
+\newtcbtheorem[use counter from=defn]{conj}{Conjecture}{conjstyle}{conj}
+
+\newtcolorbox{aside}{asidestyle}
+\newtcolorbox{exercises*}{exercisestyle}
+\newtcolorbox{exercises}{exercisestyle2}
+\newtcolorbox{exercisessec}{exercisestyle4}
+\newtcolorbox{exercise}{exercisestyle3}
+
+\pgfplotsset{compat=newest}
+\usetikzlibrary{arrows,calc,patterns}
+\usepackage{newpxtext,newpxmath}
+\graphicspath{ {./Math 176/} }
+\begin{document}
+\setlist{nolistsep,leftmargin=*}
+\pagestyle{fancy}
+\fancyhead[L]{Ryan Gomberg}
+\fancyhead[C]{Math 178 Notes (Mathematical Machine Learning)}
+\fancyhead[R]{Page \thepage \hspace{0.2mm} of 23}
+
 \begin{flushleft}
 \section{Model Types and Algorithms}
 \textbf{1.1 \hspace{1mm} Supervised vs. Unsupervised Learning}\\
@@ -80,16 +165,15 @@ where $n$ observations are given and assumed that each observation is independen
 $$\mathcal{L}\left(\beta_0, \overrightarrow{\beta}\right) = \prod_{i: y_i \in A} \hat{p} (x_i) \prod_{i: y_i \in B} (1 - \hat{p}(x_i)). $$
 Finding such $\beta_0, \overrightarrow{\beta}$ that maximizes $\mathcal{L}$ is the \textbf{Maximum Likelihood Estimator (MLE)}.
 \pagebreak
-\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
-\begin{example}
-	Suppose we are given a fair die and we roll it four times with the observed outcomes 5, 2, 3, 		6. Let $\theta$ be the probability of rolling a 3. What is the Maximum Likelihood Estimation 		for $\theta$?
-\end{example}
+\begin{example}{}{MLE}
+Suppose we are given a fair die and we roll it four times with the observed outcomes 5, 2, 3, 		6. Let $\theta$ be the probability of rolling a 3. What is the Maximum Likelihood Estimation 		for $\theta$?\\
+\vspace{1mm}
 Let $P(3) = \theta$ and $P(\text{Not } 3) = 1 - \theta$. Then,
 $$f(\theta) = \theta(1 - \theta)^3.$$
 We take the natural log of $f$, differentiate, and set equal to zero to find the corresponding $\theta$:
 $$\ln (f(\theta)) = \ln (\theta) + 3\ln(1 - \theta) \Longrightarrow \frac{d}{d\theta} \ln (f(\theta)) = \frac{1}{\theta} + \frac{3}{1 - \theta} = 0 \Longleftrightarrow \theta = \frac{1}{4}.$$ 
 One could argue that this is indeed the maximum through the second derivative test.
-\end{tcolorbox}
+\end{example}
 \vspace{3mm}
 \textbf{2.2 \hspace{1mm} Maximum A Posteriori (MAP) Estimation}\\
 \vspace{2mm}
@@ -99,17 +183,15 @@ Here $P(A | B)$ is the \textit{posterior probability}, or the probability obtain
 $$\underset{\theta}{\text{argmax}} \hspace{1mm} P(X | \theta) P(\theta). $$
 This is the \textbf{Maximum A Posteriori Estimation}. Since we are maximizing with respect to $\theta$, we treat $P(X)$ as a constant and can ignore it.\\
 \vspace{2mm}
-\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
-\begin{example}
+\begin{example}{}{MaxaPost}
 	Use the same setup from the previous example. Given the priors 0.8, 0.45, 0.1, 0.04 for $		\theta = $ 0.5, 0.3, 0.7, 0.6 respectively, compute the Maximum A Posteriori Estimation for $\theta$.  
-\end{example}
 Compute the posteriori for each prior $\theta$ (where $P(X | \theta) = f(\theta)$ from past example) and determine which is the largest:\\
 $\theta = 0.5 \Longrightarrow (0.5)^4 (0.8) \approx 0.08$\\
 $\theta = 0.3 \Longrightarrow 0.3(0.7)^3 (0.45) \approx 0.0463$\\
 $\theta = 0.7 \Longrightarrow 0.7(0.3)^3(0.1) \approx 0.00189$\\
 $\theta = 0.6 \Longrightarrow 0.6(0.4)^3 (0.04) \approx 0.001536$\\
 The Maximum A Posteriori is therefore 0.08 for when $\theta = 0.05$.
-\end{tcolorbox}
+\end{example}
 \vspace{2mm}
 Similar to MLE, we can compute MAP by taking the natural log and differentiating to easily obtain the maximum.\\
 \vspace{2mm}
@@ -204,15 +286,233 @@ The regions are generated by \textit{splitting} the plane in half between pair o
 \includegraphics[width=0.52\textwidth]{knn2}
 \end{center}
 \begin{flushleft}
-\begin{tcolorbox}[colback=blue!10!white, colframe=blue!50!black, left=2mm, arc=0mm]
-\begin{example}
 
+\begin{example}{}{oh}
+(To be computed: Decision boundary for LDA)
 \end{example}
-\end{tcolorbox}
 \pagebreak
 \section{Resampling Methods}
-YEP
-\\
+The process we have streamlined thus far has been to build a model, train it on existing data (choose objective function and optimize), and then test it on new data. So far, we have assumed that one set of training and test data is sufficient. What if we want, given a fixed amount of data, many sets of train and test data? We refer to this as \textit{resampling}, or generating different samples of training data to get a better understanding of how our models hold up. For example, if we have 100 observations, we could generate 20 sets of (90 training data, 10 test data) models, and see how they compare to each other. Recall from earlier that, given a model $f(x)$ with predicted value and observed value, $f(x_0), y$, 
+
+$$\text{Test Error } = E_{\varepsilon, \text{ train}}\left[y - \hat{f}(x_0)\right]$$
+
+We applied this to a single set of test data. Partitioning our training just once is wasteful; we are not using the available data to its maximum capacity! This is the motivation for resampling methods.\\
+\vspace{1mm}
+There are two general approaches to resampling:
+\vspace{1mm}
+\begin{itemize}
+\item{Pretend there is no separated test data. Instead, choose different training and test sets, out of the entire data, in each sample.\\
+\vspace{1mm}}
+\item{Ignore the initial set of test. Within the training data, partition into new subsets of training and test data. Then, validate on the initial set of test data}
+\end{itemize}
+
+Validating our data really means that we want to \textit{test} the performance of our model, generated by the subsets of training data, on the subsets of test data before using the ``real" test data. This is a way of using observations as a preliminary test before generalizing a model to unseen data.\\
+\vspace{1mm}
+In the following sections, we will discuss three methods of resampling, which approach they fall into, and dive into their cost-benefit trade-off.
+
+\subsection{Leave One Out Cross Validation}
+Suppose we are given a dataset with $N$ observations. The Leave One Out Cross Validation (LOOCV) method constructs $N$ \textit{folds}, or samples, each containing $N - 1$ training data. The remaining observation is the test data. The accuracy is measured by averaging the performance of the $N$ models.
+\begin{center}
+\includegraphics[width = 0.5\textwidth]{loocv}
+\end{center}
+
+\begin{flushleft}
+The blue rectangles indicate the set of data we are training, and the red rectangle is the singular test data. \\
+\vspace{1mm}
+With the large amount $(N)$ of models generated by LOOCV, the accuracy will be more promising compared to other methods because we are using all $N$ observations in each fold, utilizing the data to its full potential. The model works well in practice; however, the computational cost grows significantly as the number of observations increases. Therefore, this method is typically avoided with large datasets and used for when $N$ is small.\\
+\vspace{1mm}
+
+\subsection{K-Fold Cross Validation}
+$K$-Fold validation relaxes the restrictions imposed on partitioning data. Instead of generating $N$ models, we partition the training data into $k < N$ groups. For each group, or fold, we train on $k - 1$ groups and test on the remaining group. This is performed $k$ times to ensure each group is the test data one time. \\
+\end{flushleft}
+\vspace{1mm}
+\begin{center}
+\includegraphics[width = 0.79\textwidth]{kfold}
+\end{center}
+
+\begin{flushleft}
+The figure performs a 5-fold cross validation $(k = 5)$. First, we partition our entire dataset into training and test data, which will be kept aside for now. For the time being, we operate on the training data by splitting it into 5 equal folds. In the first iteration, we let \textcolor{blue}{folds 2$-$5} be the training data and then test the new-found model on \textcolor{red}{fold 1}. We iterate four more times until each fold has been used as test data. Then, we compute the average performance across the 5 folds $(\overline{a})$. Then, we generate a model on the entire training set (combining all 5 folds) and then test on the data we set aside earlier.\\
+\vspace{2mm}
+Typically, to lessen computational cost, $k = 5$ or $k = 10$ are reasonable choices. \\
+\vspace{2mm}
+$K$-Fold Cross Validation is a great resampling method; it efficiently takes advantage of training data before using any test data. Ultimately, we will get an idea of our model will perform before applying it on new, unseen data.\\
+
+\subsection{Bootstrapping}
+Compared to the other two approaches, bootstrapping takes on a more general philosophy. We generate $k$ subsets of our observation data with replacement, each containing $n$ data points, and apply it on unseen data.
+\end{flushleft}
+\begin{center}
+\includegraphics[width = 0.6\textwidth]{bootstrapping}
+\end{center}
+\begin{flushleft}
+Suppose our data has 25 observations. The bootstrapping method applied here takes 3 subsets of observation data, each containing 20 data points. We would then obtain 3 unique models. \\
+\vspace{2mm}
+Bootstrapping is incredibly powerful in repeated sampling. Of course, we will obtain a higher accuracy with more samples. 3 is way too small; generally 500-1000 of samples are more reasonable with larger data. This, in turn, will increase accuracy but also increase the computational cost. Overall, bootstrapping gives us some intuition on the \textit{variance} between splits and the uncertainty of accuracy.
+\end{flushleft}
+
+
 \pagebreak
 \section{Neural Networks, Deep Learning}
+1. Overview of Neural Networks, Motivation\\
+2. Common Transfer/Activations\\
+3. Examples of Boolean NN\\
+4. Gradient Descent and Backpropagation 
+
+\pagebreak
+\section{Decision Trees and Ensemble Methods}
+We have looked at various supervised learning models$-$kNN, linear/logistic models, Naive Bayes, LDA/QDA, Neural Networks$-$each with their own spin on classification and regression problems. Now, we consider an approach that has a similar concept to kNN. Consider the usual setup: given a set of data $\lbrace (x_i, y_i) \rbrace$, can we predict where $y$ falls on new data?\\
+\subsection{Decision Trees}
+This time, we will predict $y$ based on nested \textit{if-else} statements or \textit{claim}. Or, more plainly, an observation will follow a trajectory based on whether it is lower than or above certain numerical quantities. For instance, let's say we want to predict whether a student gets admitted into grad school. We can classify criteria accordingly:\\
+\vspace{2mm}
+\begin{itemize}
+\item{Primary claim: Move left if the student's undergraduate GPA is $\leq 3.5$ (1), and right if it is $>3.5$ (2).}
+\item{Secondary claim: Given (1) is true, move left is the student has at most 2 year of work experience (3), and right if they have more than 2 year (4). Given (2) is true, move left if the student has at most 1 year of work experience (5), and right if they have more than 1 year (6).}
+\item{Tertiary claim: For students with an undergraduate GPA $\leq 3.5$ and at most 2 years of work experience (3), move left if they participated in no clubs (7) and move right if they participated in at least one club (8).\\
+\vspace{2mm}}
+\end{itemize}
+We can structure our findings as such:\\
 \end{flushleft}
+\begin{center}
+\includegraphics[width = 0.6\textwidth]{dtree1}
+\end{center}
+\begin{flushleft}
+The resulting diagram is what we call a \textit{decision tree}. It uses a sequence of decisions to partition the $x$-space into $M$ regions$-R_1, R_2, \cdot \cdot \cdot , R_M$. Each nodes $N_i$ are associated with a region $R_i '$ in said $x$-space alongside a decision $D_i$, except ones at the end. We define these nodes \textit{leaves}, or \textit{terminal nodes}, as those without descendants or further decisions/partitions.\\
+
+\begin{minipage}[t]{0.68\linewidth}\vspace{0pt}
+Taking the decision tree to the right, $N_3, N_4, N_6, N_7$ are leaves. $D_i$ are the decisions corresponding to the nodes $N_i$. Therefore, there are three decision nodes: $D_1$, $D_2$, and $D_5$ for the nodes $N_1, N_2, N_5$. If an observation fails to satisfy a claim, then we denote it as $\overline{D}_i$. Say an observation satisfies the claims $D_1$ and $D_5$ but does not satisfy $D_2$. Then the region $R_2$ (node $N_6$) is the set $\lbrace x: D_1, \overline{D}_2, D_5 \rbrace$.\\
+ 
+The grad school decision tree models a \textit{classification} problem, where the response is a binary outcome (accepted to grad school = 1, not accepted = 0). The terminal nodes in the model $R_1, R_2, R_3, R_4, R_5$ are the five different regions, or categories of students.\\
+\end{minipage}
+\begin{minipage}[t]{0.3\linewidth}\vspace{0pt}
+\includegraphics[width = 0.9\textwidth]{dtree2}
+\end{minipage}
+\begin{itemize}
+\item{$R_1$: Student has GPA $\leq 3.5$ and has more than 2 years of work experience.}
+\item{$R_2$: Student has GPA $> 3.5$ and has at most one year of work experience.}
+\item{$R_3$: Student has GPA $> 3.5$ and has more than one year of work experience.}
+\item{$R_4$: Student has GPA $\leq 3.5$, has at most 2 years of work experience, and has not participated in clubs.}
+\item{$R_5$: Student has GPA $\leq 3.5$, has at most 2 years of work experience, and has participated in at least one club.\\}
+\end{itemize}
+\vspace{2mm}
+Such a classification problem could be a (over)simplified heuristic for an admissions board in accepting/denying students, saying that students who fall in the regions $R_1, R_3, $ and $R_5$ should get admitted and denying $R_2$, $R_4$.\\
+\vspace{2mm}
+To further simplify the problem, suppose we no longer want to use club participation as a predictor and only use GPA and work experience in our model. How can we draw each region in the $x$-plane?\\
+\vspace{2mm}
+Suppose $x^{1}$ measures GPA and $x^{(2)}$ measures work experience. Then we are concerned with the claims $x^{(1)} \leq 3.5$ and $x^{(2)} \leq 2$ if the first claim is true and $x^{(2)}$ if false.\\
+\vspace{1mm}
+(See next page)\\
+\pagebreak
+\begin{minipage}{0.5\linewidth}\vspace{0pt}
+Seeing how the plane is partitioned, an admissions board would be more likely to accept students in \textcolor{blue}{region 2} and \textcolor{purp}{region 4}. Obviously, we cannot guarantee high accuracy, especially if we are only using 2 predictors. If we decided that club participation is significant enough, we would have a 3-dimensional space and $x^{(3)}$ is the predictor associated with clubs.\\
+\end{minipage}
+\begin{minipage}{0.48\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{dtree3}
+\end{minipage}
+
+\vspace{2mm}
+We now look at examples of different decision tree boundaries.
+\begin{example}{}{db1}
+Suppose $x^{(1)}$ and $x^{(2)}$ are two predictors and $t_1, t_2, t_3, t_4$ are parameters. Let us define regions $R_1, \cdot \cdot \cdot ,R_5$ by:
+\begin{itemize}
+\item{$R_1: x^{(1)} < t_1, x^{(2)} < t_2$}
+\item{$R_2: x^{(1)} < t_1, x^{(2)} \geq t_2$}
+\item{$R_3: x^{(1)} \geq t_1, x^{(2)} < t_3$}
+\item{$R_4: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} < t_4$}
+\item{$R_5: x^{(1)} \geq t_1, x^{(1)} \geq t_3, x^{(2)} \geq t_4$}
+\end{itemize}
+Draw the corresponding decision tree and regions in the $x$-plane.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{dtree6}
+\hspace{1mm}
+\includegraphics[width=0.48\textwidth]{dtree4}
+\end{figure}
+\end{example}
+\begin{example}{}{db2}
+This time, change $R_3, R_4, R_5$ such that
+\begin{itemize}
+\item{$R_3: x^{(1)} \geq t_1, x^{(2)} < t_4, x^{(1)} < t_3$}
+\item{$R_4: x^{(1)} \geq t_1, x^{(2)} < t_4, x^{(1)} \geq t_3$}
+\item{$R_5: x^{(1)} \geq t_1, x^{(2)} \geq t_4$}
+\end{itemize}
+What is the new decision tree and region distribution in the $x$-plane?
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{dtree7}
+\hspace{1mm}
+\includegraphics[width=0.48\textwidth]{dtree5}
+\end{figure}
+\end{example}
+In theory, region can have any shape, but we use rectangles for simplicity and ease of interpretation.\\
+\vspace{2mm}
+The general procedure for generating decision trees and boundaries, in a \textbf{regression} setting, follow: 
+\begin{enumerate}
+\item{Divide the predictor space into $J$ distinct and nonoverlapping regions $R_1, ..., R_J$.}
+\item{For every observation that falls into the same region, we make the same prediction$-$average the training observations in that region}
+\item{Find $R_1, \cdot \cdot \cdot, R_J$ that minimize the residual sum of squared error (RSS)
+$$\text{RSS} = \sum_{j = 1}^J \sum_{i \in R_j} \left(y_i - \overline{y}_{R_j} \right)^2 $$
+where $\overline{y}_{R_j}$ is the mean response for the region $R_j$.}
+\end{enumerate}
+In more complex cases, it may not be feasible to check all possible combinations of regions. So, we may just optimize for one split. At the splitting step, pick a random predictor $X_j$ and a cutoff point $S$, and we split into two groups
+$$R_1 ^{(j, s)} = \lbrace x | x_j < s \rbrace , \hspace{5mm} R_i^{(j, s)} = \lbrace x | x_j \geq s \rbrace$$
+Then, we minimize
+$$\sum_{i: x_i \in R_1 ^{(j, s)}} (y_i - \hat{y} R_i )^2 + \sum_{i: x_i \in R_2^{(j, s)}} (y_i - \hat{y}R_2 )^2$$
+This is called \textit{recursive learning splitting}.\\
+\vspace{2mm}
+\textit{Remark}: For \textbf{classification} models, we take the majority vote in each region.\\
+\vspace{2mm}
+A decision tree function for regression models is computed by
+$$f(x) = \sum_{m = 1}^J c_m \mathds{1}_{x \in R_m}$$
+Here $\mathds{1}$ is the \textit{indicator function}, given by
+$$\mathds{1}_{x \in R_m} = \begin{cases}
+1 & \text{ if } x \in R_m\\
+0 & \text{ otherwise }\\
+\end{cases}$$
+which really just tells us to return 1 if $x$ belongs to a particular region. $c_m$ is the average response in the corresponding region.\\
+\begin{example}{}{dt3}
+Suppose we wanted to train a decision tree regression model based on 5 data points
+$$\left( \begin{pmatrix}
+2\\
+1\\
+\end{pmatrix}, 5 \right),
+\left( \begin{pmatrix}
+3\\
+2\\
+\end{pmatrix}, 7 \right),
+\left( \begin{pmatrix}
+5\\
+-2\\
+\end{pmatrix}, -1 \right),
+\left( \begin{pmatrix}
+6\\
+3\\
+\end{pmatrix}, 2 \right), 
+\left( \begin{pmatrix}
+10\\
+-5\\
+\end{pmatrix}, -8 \right)$$
+with the decision boundaries $D_1: x_1 < 4, D_2: x_1 < 6$. Construct a decision tree model $f(x)$ that predicts an outcome $y$ for new data. Additionally, compute the RSS.\\
+
+Let $R_1$ be the region left of $D_1$, $R_2$ be the region between $D_2$ and $D_3$, and $R_3$ be the region to the right of $D_2$. Label $N_1 \to N_5$ be the given nodes from left to right. Then, $N_1, N_2 \in R_1, N_3, N_4 \in R_2$, and $N_5 \in R_3$. We compute $c_m$ as the average of the responses for each region.
+
+$$c_1 = \frac{5 + 7}{2} = 6, \hspace{5mm} c_2 = \frac{2 - 1}{2} = \frac{1}{2}, \hspace{5mm} c_3 = \frac{-8}{1} = -8.$$
+Then, the function can be modeled accordingly:
+$$f(x) = 6 \cdot \mathds{1}_{x \in R_1} + \frac{1}{2} \cdot \mathds{1}_{x \in R_2} - 8 \cdot \mathds{1}_{x \in R_3}.$$
+The RSS for each region is computed as the sum of differences between the observed value and average of observed values, squared.\\
+For $R_1$:
+$$\text{RSS}_1 = (5 - 6)^2 + (7 - 6)^2 = 2$$
+For $R_2$:
+$$\text{RSS}_2 = \left(-1 - \frac{1}{2} \right)^2 + \left(2 - \frac{1}{2} \right)^2 = 2.25 + 2.25 = 4.5$$
+For $R_3$:
+$$\text{RSS}_3 = (8 - 8)^2 = 0$$
+The total RSS is therefore $\text{RSS}_1 + \text{RSS}_2 + \text{RSS}_3 = 2 + 4.5 + 0 = 6.5$.
+\end{example}
+Intuitively, if similar outputs are in the same region, we obtain a better cut.\\
+\vspace{2mm}
+Decision trees are more likely to overfit our training data, especially if we choose a greater depth (more decisions and nodes). In summary, they are sensitive to training data which leads to high variance and low bias. In a practical setting, decision boundaries for decision trees are nonlinear, which poses an advantage compared to a standard linear regression model. While we used linear boundaries in the previous examples, note that decision boundaries are typically \textbf{non-linear} and \textbf{non-parametric}.\\
+\subsection{Random Forests}
+The goal of this section is to produce a model that tries to solve the overfitting dilemma that decision trees are prone to.
+
+\pagebreak
+\section{Unsupervised Learning}
+\end{flushleft}
+\end{document}
