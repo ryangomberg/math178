@@ -1,107 +1,30 @@
-\documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[fleqn]{amsmath}
-\usepackage[svgnames]{xcolor}
-\usepackage{hyperref}
-\usepackage{float}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{graphicx}
-\usepackage{geometry}
-\usepackage{dsfont}
-\usepackage{lipsum}    
-\usepackage{nicematrix}
-\usepackage[dvipsnames]{xcolor}
-\usepackage[breakable,theorems,skins]{tcolorbox}
-\usepackage{enumitem}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\usepackage{multirow}
-\usepackage[all]{xy}
-\usepackage{tzplot}
-\usepackage{caption}
-\usepackage{pgfplots}
-\usepackage{chngcntr}  
-\usepackage{placeins}
-
-\definecolor{purp}{HTML}{961CEB}
-
-\def\exstart{\hangindent\leftmargini\textup{1.}\hspace{\labelsep}}
-
-\newcommand\boldinline[1]{\paragraph{#1}}
-\newcommand\boldsubsection[1]{\subsection*{#1}}
-\newcommand\boldsubsubsection[1]{\subsubsection*{#1}}
- 
-\newenvironment{enumeratea}{
-	\begin{enumerate}
-	  \renewcommand{\labelenumi}{(\alph{enumi})}}
-	{\end{enumerate}}
-
-
-%Theorems
-\tcbset{
-	defstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt, left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, colback=blue!7!white, grow sidewards by=8pt, drop fuzzy shadow},
-	exstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{orange!75!white}},
-	thmstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=green!12!white, grow sidewards by=8pt, drop fuzzy shadow},
-	exercisestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \ \ }},
-	proofstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{green!50!white}},
-	asidestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{black!50!white}},
-	exercisestyle2/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesubsection.\ \ \ }},
-	exercisestyle4/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesection.\ \ \ }},
-	exercisestyle3/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercise\quad}},
-	conjstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=red!12!white, grow sidewards by=8pt, drop fuzzy shadow},
-	}
-
-\tcolorboxenvironment{proof}{breakable,proofstyle}
-
-\newtcbtheorem[number within=section]{defn}{Definition}{defstyle}{defn}
-\newtcbtheorem[use counter from=defn]{example}{Example}{exstyle}{ex}
-\newtcbtheorem[use counter from=defn]{examples}{Examples}{exstyle}{ex}
-\newtcbtheorem[use counter from=defn]{thm}{Theorem}{thmstyle}{thm}
-\newtcbtheorem[use counter from=defn]{lemm}{Lemma}{thmstyle}{lemm}
-\newtcbtheorem[use counter from=defn]{cor}{Corollary}{thmstyle}{cor}
-\newtcbtheorem[use counter from=defn]{axiom}{Axiom}{defstyle}{axiom}
-\newtcbtheorem[use counter from=defn]{axioms}{Axioms}{defstyle}{axioms}
-\newtcbtheorem[use counter from=defn]{conj}{Conjecture}{conjstyle}{conj}
-
-\newtcolorbox{aside}{asidestyle}
-\newtcolorbox{exercises*}{exercisestyle}
-\newtcolorbox{exercises}{exercisestyle2}
-\newtcolorbox{exercisessec}{exercisestyle4}
-\newtcolorbox{exercise}{exercisestyle3}
-
-\pgfplotsset{compat=newest}
-\usetikzlibrary{arrows,calc,patterns}
-\usepackage{newpxtext,newpxmath}
-\graphicspath{ {./Math 176/} }
 \begin{document}
 \setlist{nolistsep,leftmargin=*}
 \pagestyle{fancy}
 \fancyhead[L]{Ryan Gomberg}
 \fancyhead[C]{Math 178 Notes (Mathematical Machine Learning)}
-\fancyhead[R]{Page \thepage \hspace{0.2mm} of 23}
+\fancyhead[R]{Page \thepage \hspace{0.2mm} of 48}
 
 \begin{flushleft}
 \section{Model Types and Algorithms}
-\textbf{1.1 \hspace{1mm} Supervised vs. Unsupervised Learning}\\
+\subsection{Models Types and Accuracy}
+\textbf{Supervised vs. Unsupervised Learning}\\
 \vspace{2mm}
 Supervised learning is often referred to as \textit{learning with training.} Given data $X, y$, we want to fit the mapping between $X$ and $y$ with training data and make predictions with the new $y$ given new $X$ in the test dataset. The ultimate goal is to minimize the distance between $\hat{y}$, the predicted value, and $y$.\\
 \vspace{2mm}
 Unsupervised learning is \text{learning without training.} This time, there is no response $y$ to be predicted. Instead, we \textit{explore} the pattern of data using methods such as clustering or dimension reduction.\\
 \vspace{2mm}
-\textbf{1.2 \hspace{1mm} Regression vs. Classification}\\
+\textbf{Regression vs. Classification}\\
 \vspace{2mm}
 In supervised machine learning models, regression is often used with numerical data and classification is used with categorical data (consists of multiple classes or levels).\\
 \vspace{2mm}
-\textbf{1.3 \hspace{1mm} Parametric vs. Non-parametric models}\\
+\textbf{Parametric vs. Non-parametric models}\\
 \vspace{2mm}
 \textit{Parametric} machine learning models assume that the function can be modeled in a functional form and follows a procedure to \textit{fit} and \textit{train} the model. In linear regression, the functional form is a linear combination of unknown parameters and our predictors.\\
 \vspace{2mm}
 \textit{Non-parametric} machine learning algorithms, in contrast, does not explicitly assume a functional form is possible and limits the need for finding parameters. Instead, it uses patterns and trends in existing training data to predict results in the test data. The K-nearest neighbors algorithm is just one example. Test points are compared to a set amount of training data points that are closest, or similar, to it.\\
 \vspace{2mm}
-\textbf{1.4 \hspace{1mm} Measuring accuracy in machine learning models}\\
+\textbf{Measuring accuracy in machine learning models}\\
 \vspace{2mm}
 The standard measurement of accuracy is computing the mean squared error (MSE). If $y_i$ and $x_i$ are observations in training data and $\hat{f}$ is the \textit{function} described by the model, then
 $$\text{Training MSE} = \frac{1}{n} \sum_{i = 1}^{n} \left(y_i - \hat{f}(x_i)\right)^2.$$
@@ -116,13 +39,13 @@ Here we use properties of expectations from probability theory. The above equati
 \vspace{2mm}
 Combining these two factors is what we know as the \textbf{Bias-Variance Tradeoff}. Increasing the bias of a linear model lowers the variance, and vice versa. Generally, we want to strike a balance between the two factors that will minimize the test MSE.\\
 \vspace{2mm}
-\textbf{1.5 \hspace{1mm} Flexible vs. Inflexible Models}\\
+\textbf{Flexible vs. Inflexible Models}\\
 \vspace{2mm}
 \textit{Flexible} models are often used to capture more complex relationships, such as decision trees or high degree polynomial regression. They can readily adapt to changes in data (i.e. new training/test data). Flexible models are more prone to overfitting and consequently having high variance.\\
 \vspace{2mm}
 \textit{Inflexible} models follow a rigid, functional form that cannot capture complex patterns in data and assume a rigid, predefined relationship between inputs and outputs. Flexible models tend to have more bias and succumb to underfitting.\\
-\vspace{2mm}
-\textbf{1.6 \hspace{1mm} K-Nearest Neighbors (KNN) Algorithm}\\
+\subsection{Basic Algorithms}
+\textbf{K-Nearest Neighbors (KNN) Algorithm}\\
 \vspace{2mm}
 The K-Nearest Neighbors method is a supervised learning algorithm that makes predictions based on how \textit{similar} new data points are to existing data. We compute the Euclidean distance between the test data point and all of the observed data, then choosing $k$ of the existing points that are closest in distance.\\
 \vspace{2mm}
@@ -131,8 +54,8 @@ The K-Nearest Neighbors method is a supervised learning algorithm that makes pre
 \item{In a regression setting, the predicted value is the average of the values of the $k$ neighbors.}
 \end{itemize}
 $k$ is what we call a \textit{hyperparamter}, or tuning parameter; it does not depending on the training process. As we increase $k$, the flexibility of the algorithm increases. If we choose too many neighbors, we may observe overfitting and misleading predictions.\\
-\vspace{2mm}
-\textbf{1.7 \hspace{1mm} Normal Equation for Linear Regression}\\
+\pagebreak
+\textbf{Normal Equation for Linear Regression}\\
 \vspace{2mm}
 Recall that a linear model with $p$ predictors is approximated by
 $$\hat{f}(x) = c_0 + c_1 x_1 + c_2 x^2 + \cdot \cdot \cdot c_p x^p.$$
@@ -141,18 +64,13 @@ $$\min_{\overline{w}} \sum_{i = 1}^n y_i - \hat{f}(x_i).$$
 $\overline{w}$ is just the set of parameters we want to solve for in the above problem. Recall that with higher degree polynomial regression (degrees of freedom > 2), it is nonlinear with respect to $x$ but it is linear with respect to the parameters. Hence, we can apply methods from linear algebra to solve the optimization problem. The most common approach is through \textit{gradient descent}, for which we take partial derivatives of each parameter and iterate until we find the minimum. The solution is given by the \textbf{normal equation}:
 $$\widehat{W} = \left(M^T M\right)^{-1} M^T \overrightarrow{Y}.$$
 If $n$ is the number of observations in our training data, then $M$ is a $n \times (p + 1)$ matrix containing the intercept terms (column of 1s) and the predictors in our training data. $\overrightarrow{Y}$ is a $n \times 1$ vector consisting of the response values in our training data.\\
-\vspace{5mm}
-\textbf{Degrees of freedom}: The number of independent terms used to fit the data. A polynomial of degree $p$ has degree of freedom $= p + 1$ (remember to include the intercept term). It is simply another measurement of flexibility to fit the data. \\
-\vspace{5mm}
-\textbf{Gradient descent problem}
-$$\min_{\overrightarrow{c}} \phi(\overrightarrow{c}) = \min_{\overrightarrow{c}} ||\overrightarrow{y} - X\overrightarrow{c}||^2.$$
 \pagebreak
 \section{Classification and Generative Models}
 Previously, we assumed that we can fit a model $y = f(x) + \varepsilon$, where $\varepsilon$ does not depend on $x$. Now, suppose we let the error also depend on $x$. Then, $y = f(x) + \varepsilon (x)$. We say that $f(x)$ is deterministic and $\varepsilon(x)$ is a random variable. The main objective is to find
 $$p(y, x) \approx P(Y = y \hspace{1mm} | \hspace{1mm} X = x)$$
-or, that approximation of a model relative to the probability that it predicts $y$ given $x$. For the models in this section, we assume that the $Y$ is a discrete random variable to avoid complications.\\
-\vspace{3mm}
-\textbf{2.1 \hspace{1mm} Maximum Likelihood Estimation}\\
+or, that approximation of a model relative to the probability that it predicts $y$ given $x$. For the models in this section, we assume that the $Y$ is a discrete random variable to avoid complications.
+\subsection{MLE and MAP estimations}
+\textbf{Maximum Likelihood Estimation}\\
 \vspace{2mm}
 We proceed by using a standard logistic regression model. Assume that we are given data $(\overrightarrow{x_i}, y_i)$, where $Y$ can take on two classes: $A$ or $B$. Our goal is to have our model $\hat{p}$ roughly estimate the probability that each outcome occurs. A standard linear regression model would argue that we can approximate in the form $Y = \beta_0 + \beta_1 X$. However, this can quickly violate our goal! Recall that our objective function is a probability function, so the range of values must be $0 < P(Y = y \hspace{1mm} | \hspace{1mm} X = x) < 1$. This is where we introduce logistic regression: a model that takes on the form
 $$\hat{p} (Y \in A \hspace{1mm} | \hspace{1mm} X = x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}.$$
@@ -175,7 +93,7 @@ $$\ln (f(\theta)) = \ln (\theta) + 3\ln(1 - \theta) \Longrightarrow \frac{d}{d\t
 One could argue that this is indeed the maximum through the second derivative test.
 \end{example}
 \vspace{3mm}
-\textbf{2.2 \hspace{1mm} Maximum A Posteriori (MAP) Estimation}\\
+\textbf{Maximum A Posteriori (MAP) Estimation}\\
 \vspace{2mm}
 Recall Bayes' Formula from probability theory. If $A$ and $B$ are both events, each assigned their own probability, then the conditional probability
 $$P(A | B) = \frac{P(A) P(B | A)}{P(B)}.$$
@@ -196,15 +114,15 @@ The Maximum A Posteriori is therefore 0.08 for when $\theta = 0.05$.
 Similar to MLE, we can compute MAP by taking the natural log and differentiating to easily obtain the maximum.\\
 \vspace{2mm}
 For logistic models, we choose an objective MLE (not MAP!) function, optimize, and apply new inputs to predict new samples $\hat{p}\left(Y | \overrightarrow{X} = X_0\right)$ directly.\\
-\vspace{3mm}
-\textbf{2.3 \hspace{1mm} Generative Models: Naive Bayes, LDA, QDA}\\
+\subsection{Generative Models}
+\textbf{Naive Bayes, LDA, QDA}\\
 \vspace{2mm}
 Compared to logistic regression, generative models are used to learn how the data itself is distributed through training the data and then testing the model on new data. Hence, they aim to learn the joint probability distribution $P(X, Y)$ (supervised case) or $P(X)$ (unsupervised case). For now, we focus on three generative models: Naive Bayes and Linear/Quadratic Discriminant Analysis.\\
 \vspace{2mm}
 As given by its name, the Naive Bayes' algorithm is derived from Bayes' formula. For Naive Bayes, the underlying assumption is that the observations in \textit{each class} is independent of each other. Thus, we apply the basic law of probability $P(A \cap B) = P(A)P(B)$. Let $\overrightarrow{X}$ be the vector containing our features and let $\left(X^j | Y = k \right)$ be the $j$-th observation in the $k$-th class. Then, the Naive Bayes' formula is given as
 $$\hat{p}\left(\overrightarrow{X} | Y = k \right) = \prod_j \hat{p}\left(X^j \hspace{1mm} | \hspace{1mm} Y = k \right).$$
 The expression itself says that the probability that a sample falls into a class is computed as the product of probabilities for each feature within that class. We also say that this conditional probability is directly proportional to the prior of the class. Generally, Naive Bayes is put to quick use for simple classification problems, such as spam/fraud detection, or recommendation systems.\\
-\pagebreak
+\vspace{2mm}
 Now, we consider two other algorithms that rely on a different distribution than Naive Bayes. To motivate this idea, we once again consider Bayes' Theorem. Suppose we are given data $\underset{ i = \lbrace 1, \cdot \cdot \cdot, N \rbrace}{\lbrace (x_i, y_i) \rbrace}$ and we want to classify $x_0$ into $k$ classes. Then we compute
 $$P[Y = k | X = x] = \frac{P[Y = k]P[X = x | Y = k]}{P[X = x]}.$$
 Suppose we cannot assume that the observations in each class are independent. \\
@@ -226,7 +144,7 @@ $$P[X = x] = \sum_{l = 1}^k \pi_l \cdot \frac{1}{\sqrt{2\pi} \sigma_l} e^{\frac{
 This enables us to obtain the final form of $p_k(x)$:
 $$p_k(x) = \frac{\pi_k \cdot \frac{1}{\sqrt{2\pi} \sigma_k} e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}}{\sum_{l = 1}^k \pi_l \cdot \frac{1}{\sqrt{2\pi} \sigma_l} e^{\frac{(x - \mu_l)^2}{2\sigma_l^2}}}.$$
 \\
-\pagebreak
+\vspace{2mm}
 Now that we have a closed-form expression, we want to optimize it. That is to say, we want to maximize the posterior probability, or probability that we put a sample in the $k$-th class given the features in $X$. Once again, logarithms come to the rescue! Define $\delta_k (x) = \ln (p_k(x))$. Then,
 $$\delta_k (x) = -\frac{1}{2\sigma_k} \left(x - \mu_k \right)^2 + \ln(\pi_k) + \ln \left(\frac{1}{\sqrt{2\pi} \sigma_k} \right).$$
 We seek to find the $k$ that solves the optimization problem
@@ -258,9 +176,7 @@ Some closing thoughts about LDA vs. QDA:\\
 $$p_k (x) = \frac{\pi_k f_{k_1}(x_1) \cdot \cdot \cdot f_{k_p}(x_p)}{\sum_{l = 1}^k \pi_l f_{l_1}(x_1) \cdot \cdot \cdot f_{l_p} (x_p)}.$$
 For example, if we wanted to determine the number of parameters required for Naive Bayes, we would need $k$ priors plus $2pk$ since $f_{k_i}$ has $p$ parameters and $k$ classes.\\
 
-\vspace{3mm}
-\textbf{2.4 \hspace{1mm} Decision Boundaries}\\
-\vspace{2mm}
+\subsection{Decision Boundaries}
 Simply put, decision boundaries is what really defines classification models; it is how we separate classes from each other. In general, describing decision boundaries for LDA/QDA are straightforward:\\
 \vspace{1mm}
 \begin{itemize}
@@ -283,12 +199,47 @@ Suppose we want to put $\overrightarrow{x}$ into a class using its two nearest n
 The regions are generated by \textit{splitting} the plane in half between pair of observations. While the above example doesn't fully live up to that, the intuition is hopefully there. Another example exhibits the difference of predicted region depending on number of neighbors used (1 or 2).
 \end{flushleft}
 \begin{center}
-\includegraphics[width=0.52\textwidth]{knn2}
+\includegraphics[width=0.39\textwidth]{knn3}
 \end{center}
 \begin{flushleft}
-
+\pagebreak
 \begin{example}{}{oh}
-(To be computed: Decision boundary for LDA)
+Suppose we want to perform Linear Discriminant Analysis with two predictors and one output which falls into two classes $y = 0$ and $y = 1$. The training data consists of 6 points $(x_1, x_2, y)$ given by
+$$\lbrace (-2, -2, 0), (-1, 2, 0), (-3, 0, 0), (2, -2, 1), (1, 2, 1), (3, 0, 1) \rbrace$$
+For example, the input $(1, 2)$ corresponds to 1. What is the decision boundary in the $x$-plane?\\
+
+The decision boundary is the center line $x$ between the mean vector $\overrightarrow{\mu}$ of each class, or more precisely:
+$$||x - \hat{\mu}_0|| = ||x - \hat{\mu}_1||$$
+We have that 
+$$\hat{\overrightarrow{\mu}}_0 = \begin{pmatrix}
+-2\\
+0
+\end{pmatrix} \hspace{5mm} \text{and} \hspace{5mm} \hat{\overrightarrow{\mu}}_1 = \begin{pmatrix}
+2\\
+0
+\end{pmatrix}$$
+The center line is the $x_2$-axis; any point to the left yields 0 and to the right yields 1.
+\begin{center}
+\includegraphics[width = 0.7\textwidth]{ldadb}
+\end{center}
+This holds if the covariance matrix is diagonal, or $\sigma_{12} = \sigma_{21} = 0$.
+$$\sigma_{12} = \sigma_{21} = \frac{1}{n - 1} \sum_{i = 1}^n (x_{1i} - \mu_1)(x_{2i} - \mu_2) = 0$$
+$$ = \frac{1}{n - 1} \sum_{i = 1}^n (x_{1i} - 0)(x_{2i} - 0) = 0 $$
+Where $\mu_1$ and $\mu_2$ are the average of all $x_1$, $x_2$ values in the dataset.
+\end{example}
+
+\begin{example}{}{knnreg}
+Imagine we want to perform KNN regression with $K = 2$ using a training dataset with just four observations and just one predictor. The training data consists of the four points
+$$\lbrace (1, 4), (2, 0), (6, -2), (8, -4) \rbrace$$
+(i.e. the input 1 corresponds to the output 4). Sketch a graph of what the corresponding prediction function will look like. Do not worry about boundary points (when an input is equally far from two different points)\\
+\begin{itemize}
+\item{When $x < 3.5$, the two closest neighbors are $x = 1$ and $x = 2$. Therefore, we take the average of their $y$'s, which is 2.\\}
+\item{When $3.5 < x < 5$, the two closest neighbors are $x = 2$ and $x = 6$. The average of their $y$'s is $\hat{y} = -1$.\\}
+\item{When $x > 5$, the two closest neighbors are $x = 6$ and $x = 8$. The average of their $y$'s is $\hat{y} = -3$}
+\end{itemize}
+\begin{center}
+\includegraphics[width = 0.8\textwidth]{knnreg1dim}
+\end{center}
 \end{example}
 \pagebreak
 \section{Resampling Methods}
@@ -352,16 +303,455 @@ Bootstrapping is incredibly powerful in repeated sampling. Of course, we will ob
 
 \pagebreak
 \section{Neural Networks, Deep Learning}
-1. Overview of Neural Networks, Motivation\\
-2. Common Transfer/Activations\\
-3. Examples of Boolean NN\\
-4. Gradient Descent and Backpropagation 
+
+If you have ever studied the brain, we describe its functions as one, complex, entangled web. It is comprised of billions of neurons which pass information to neurotransmitters. These so-called \textit{messengers} ``light up'' when they are activated by a neuron's incoming signal and pass on the new information to other neurons. This process is repeated until a terminal branch is reached, which then processes the information to different parts of the body. New information then gets sent back to the brain, creating a feedback loop. Ultimately, it is only with a neural network that we can perform simple tasks (i.e. movement, sensations, processing information).\\
+
+\subsection{Overview of Neural Networks}
+Neural networks in machine learning, fundamentally, are no different from our how brain works. The overarching idea is to initialize a set of neurons and send them through \textit{activation functions}. These functions get ``fired" and transmit new information to the next activation function. The process repeats until every set of activation functions has been processed; the final set our neurons is our output, or the terminal branch in this sense. Depending on our objective, the network’s output may be a single binary value, as in classification problems, or multiple continuous values.\\
+\vspace{2mm}
+The input layer consists of the set of $P$ observations $X = (X_1, X_2, \cdot \cdot \cdot, X_p)$, each assigned to a neuron. Additionally, each neuron is given a weight, which describes how strong of a \textit{connection} it has between other neurons. After the input layer, neurons then get passed into \textit{hidden layers}, each containing \textit{activation functions}. These functions are \textit{non-linear} transformations of our input neurons and generally are not fixed in advance, but instead learned as we train the network. Hidden layers can be thought of ``working behind the scenes," or as the intermediate steps of the neural network. Finally, the output layer uses the most recent activation of neurons as its input, resulting in a function $f(X)$. The diagram shown below summarizes the structure of a neural network, containing the input layer, one hidden layer, and output layer.\\
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+This is known as a \textbf{single layer neuron network}, namely because it only has one hidden layer. We take in two inputs $X_1, X_2$. The hidden layer computes activations (more on this later) on 3 neurons $A_k = h_k (x)$. The arrows indicate the feeding of the input neurons into the $K$ neurons in the hidden layer, also known as the \textit{weights}.
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{neuralnetwork1}
+\end{minipage}
+Then, the neurons from the hidden layer produce the output $f(X)$. Additionally, the weights are colored \textcolor{red}{red} and \textcolor{blue}{blue} to indicate correlation (negative and positive) between neurons. This will be further discussed in the \textbf{gradient descent} and \textbf{backpropagation} sections. We can model this the neural network by the function
+
+$$f(X) = \beta_0 + \sum_{k = 1}^K \beta_k h_k (X) = \beta_0 + \sum_{k = 1}^K \beta_k g \left(w_{k0} + \sum_{j = 1}^p w_{kj} X_j \right)$$
+$f(X)$ is written here as a culmination of two steps. The $K$ activations for $k = 1, \cdot \cdot \cdot, K$ are computed as functions of the input neurons:
+$$A_k = h_k (X) = g\left(w_{k0} + \sum_{j = 1}^p w_{kj} X_j \right)$$
+$g(z)$ is a non-linear activation function and operates on the weights $w_{kj}$ and inputs $X_j$. The next section dives into common activation functions. $\beta_k$ is known as a \textit{bias}, which allows the neuron to adjust its output without relying just on the weights, shifting the activation function and increasing flexibility. 
+
+\begin{example}{}{nn1}
+Let $X_1, X_2$ be two input neurons. The hidden layer also has two neurons $A_1, A_2$ corresponding to $h_1 (X), h_2 (X)$, and $g(z) = z^2$. The weights and biases are given by
+$$\beta_0 = 0, \hspace{3mm} \beta_1 = \frac{1}{4}, \hspace{3mm} \beta_2 = -\frac{1}{4}$$
+$$w_{10} = 0, \hspace{3mm} w_{11} = 1, \hspace{3mm} w_{12} = 1$$
+$$w_{20} = 0, \hspace{3mm} w_{21} = 1, \hspace{3mm} w_{22} = -1$$
+What is $f(X)$ with respect to $X_1, X_2$?\\
+
+Using the expressions for the activation functions,
+$$A_1 = h_1 (X) = (0 + X_1 + X_2)^2, \hspace{5mm} A_2 = h_2 (X) = (0 + X_1 - X_2)^2$$
+Then, plug into $f(X)$:
+$$f(X) = 0 + \frac{1}{4} (X_1 + X_2)^2 - \frac{1}{4} (X_1 - X_2)^2 = X_1 X_2$$
+This is known as an interaction term, often analyzed in regression models. In some cases, we would not choose $g(z)$ to be quadratic, mainly because there is a higher change to overfit and because \textbf{$g'(z)$ is unbounded}, which is a problem when we talk about gradient descent. The next section aims to introduce common activation functions in neural networks.
+\end{example}
+
+\subsection{Activation Functions}
+The core of neural networks are the transformations applied to each neuron. Without activation functions, we have cannot reliably train a model with flexibility and expect high accuracy on test data. Below is an overview of common activation functions; we will provide a more detailed description for the starred ones.\\
+\vspace{2mm}
+\begin{itemize}
+\item{Identity or linear: $g(z) = z$ or $g(z) = az + b$, \hspace{5mm} $a, b \in \mathbb{R}$.}
+\item{Polynomial: $g(z) = a_n z^n + a_{n - 1} z^{n - 1} + \cdot \cdot \cdot + a_0, \hspace{5mm} a_i \in \mathbb{R}$.}
+\item{Maxpool: $g(z) = \text{max} (z_1, \cdot \cdot \cdot, z_n)$, \hspace{5mm} $z \in \mathbb{R}^n$.}
+\item{**Linear Threshold (Heaviside)}
+\item{**ReLU (Rectified Linear Unit)}
+\item{**Sigmoid}
+\item{**Softmax\\}
+\end{itemize}
+\vspace{2mm}
+\textbf{Heaviside Function}\\
+\vspace{2mm}
+The heaviside function passes an input into a simple \textit{if-else} statement and outputs a piecewise function.\\
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+$$g(z) = \begin{cases}
+1 & \text{ if } z \geq 0\\
+0 & \text{ otherwise}\\
+\end{cases}$$
+We also compute the gradient
+$$\frac{\partial g}{\partial z} = 0.$$
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{heaviside}
+\end{minipage}
+The gradients will be useful to have for gradient descent and backpropagation. The heaviside function can be great for a simple neural network if we want a binary output, implying that the neuron either lights up or it doesn't. However, we will run into a problem when we talk about backpropagation. Namely, we want a nonzero and smooth gradient and, obviously, this is not satisfied by the heaviside function.\\
+\vspace{2mm}
+We say a neuron is \textit{active}, or firing, when the activation function returns a nonzero value and \textit{inactive} when the activation function returns zero.\\
+\vspace{2mm}
+\textbf{ReLU}\\
+\vspace{2mm}
+The ReLU takes on a slight modification from the heaviside function if $z \geq 0$. ReLU is known for its low computational cost and its sparsity$-$the proportion of times where the neurons output zero. However, if too many neurons output zero, then learning is prohibited and is formerly known as the \textit{dying ReLU problem}.\\
+\vspace{2mm}
+ReLU is great as a hidden layer activation but not an output layer activation because it only produces positive values.\\
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+$$g(z) = \begin{cases}
+z & \text{ if } z \geq 0\\
+0 & \text{ otherwise}\\
+\end{cases}$$
+$$\frac{\partial g}{\partial z} = \begin{cases}
+1 & \text{ if } z \geq 0\\
+0 & \text{ otherwise}
+\end{cases}$$
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{relu}
+\end{minipage}
+\textbf{Sigmoid Function}\\
+\vspace{2mm}
+In Chapter 2, we introduced \textit{logistic regression} models to measure probability. The sigmoid function is actually just the same model!\\
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+$$g(z) = \frac{1}{1 + e^{-z}}$$
+$$\frac{\partial g}{\partial z} = g(z)(1 - g(z))$$
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{sigmoid}
+\end{minipage}
+Sigmoid functions tend to be the desired output layer activation for binary classification models because they range from (0, 1). They can be great in hidden layer activations with small changes in inputs because the gradient is smooth and continuous for optimization. However, that's where the benefits end. If $z$ grows too large in magnitude, we run into the \textit{vanishing gradient problem}, where the gradient $\frac{\partial g}{\partial z} \approx 0$, significantly slowing down the learning process.
+
+\begin{aside}
+\textit{Aside}: Recall that a function is pointwise continuous for a sequence of functions on $\lbrace g_n (z) \rbrace_{n = 1}^{\infty}$ if $\displaystyle \lim_{n \to \infty} g_n (z) = g(z)$ for every given $z \in Z$. Suppose we constructed a sequence of sigmoid functions
+$$g_n (z) = \frac{1}{1 + e^{-nz}}$$
+and took the limit $\displaystyle \lim_{n \to \infty} g_n (z)$? We must consider two cases: $z < 0$ and $z > 0$ since they will determine the sign of $-nz$ and behavior of $g_n$. 
+$$\lim_{n \to \infty} g_n (z) = \begin{cases}
+0 & \text{ if } z < 0\\
+\frac{1}{2} & \text{ if } z = 0\\
+1 & \text{ if } z > 0\\
+\end{cases} \Longrightarrow g_n (z) = \begin{cases}
+0 & \text{ if } z < 0\\
+1 & \text{ if } z > 0\\
+\end{cases}$$
+This is the heaviside function (with the exception of $z = 0$)!\\
+
+Note, however, that the convergence for $g_n (z)$ is not uniform. This is to say that there is no ``overall speed of convergence."
+\end{aside}
+\textbf{Softmax Function}\\
+\vspace{2mm}
+The softmax function is simply an extension of the sigmoid function to multiple dimensions. Given a vector of neuron inputs $z$,
+$$g(z) = \frac{e^{z_i}}{\sum_{j = 1}^K e^{z_j}}.$$
+The output represents the probability values for each class. Akin to the sigmoid function, the softmax function is also used in the output layer in a multi-class classification problem, following a multinomial distribution.\\
+\begin{example}{}{softmax}
+Suppose we want to determine whether a neural network is most likely to classify an image as either a dog, cat, or a bird. The given input $z = [z_1, z_2, z_3]$ corresponds to the raw scores of a dog $(z_1)$, cat $(z_2)$, and bird $(z_3)$. If $z = [2.3, 2.1, 0.6]$, what will the neural network output return?\\
+
+The output vector (probabilities) $[g(z_1), g(z_2), g(z_3)]$ is generated by inputting each $z_i$ into the softmax function:
+$$g(z_1) = \frac{e^{2.3}}{e^{2.3} + e^{2.1} + e^{0.6}} \approx 0.4996, g(z_2) = \frac{e^{2.1}}{e^{2.3} + e^{2.1} + e^{0.6}} \approx 0.4091$$
+$$g(z_3) = \frac{e^{0.6}}{e^{2.3} + e^{2.1} + e^{0.6}} \approx 0.0913$$
+The output of the neural network is $[0.4996, 0.4091, 0.0913]$ and it will return ``dog" because it has the largest probability.
+\end{example}
+
+\textbf{Applications of Activation Functions}\\
+\vspace{2mm}
+Before proceeding, we summarize some important applications of neural networks for the ReLU, sigmoid, and softmax functions.\\
+\vspace{2mm}
+\begin{itemize}
+\item{ReLU: Image processing in convolutional neural networks. They find local features in an image, such as edges and small shapes. This allows the the network to learn complex patterns in images (for instance, a zebra's stripes).\\
+\vspace{1mm}}
+\item{Sigmoid: Binary classification problems such as processing emails (spam vs. not spam), medical diagnoses (positive or negative), and fraud detection (real or illegitimate transaction).\\
+\vspace{1mm}}
+\item{Softmax: Multi-class classification problems such as image classification (see previous example), text categorization and sequential word/vocabulary probability (ChatGPT does this), and handwriting recognition (the MNIST dataset is a very common example).\\
+\vspace{2mm}}
+\end{itemize}
+These activations \textit{break} linearity, namely applying non-linear transformations to each neuron and producing a nonlinear decision boundary in the end.
+\subsection{Boolean Neural Networks}
+This section is designed to apply neural networks in simple logic problems. Before we begin, we let $z_k$ be the linear combination of weights plus the bias in the $k$-th neuron, as described in Section 4.1:
+$$z_k = \beta_k + \sum_{j = 1}^p w_{kj} X_j $$
+
+\textbf{AND Boolean}\\
+\vspace{2mm}
+Basic True/False boolean problems are often summarized in a truth table. The \text{AND}$(X_1, X_2)$ boolean returns true if two predictors return true, and false otherwise. The truth table is therefore
+
+\begin{center}
+\begin{tabular}{|c|r|r|r|}
+	\hline
+	 $X_1$ & $X_2$ & $\text{AND}(X_1, X_2)$ \\\hline
+	T & T & T \\\hline
+	T & F & F  \\\hline
+	F & T & F \\\hline
+	F & F & F  \\\hline
+\end{tabular}
+\end{center}
+
+Let $0 = \text{ False}$ and $1 = \text{ True}$. Suppose we wanted to construct a decision boundary for the set of points
+$$\lbrace (0, 0)^T, (0, 1)^T, (1, 0)^T, (1, 1)^T \rbrace$$
+using a neural network, containing one hidden layer.\\
+\vspace{2mm}
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+Here we are tasked to design a neural network with a set of weights and biases in the hidden layer. We can actually construct a linear decision boundary, which means we do not need any special activation functions in the hidden layer! We can apply a simple linear transformation. Let $\overrightarrow{w}$ be the set of weights $[w_1, w_2]$ given by $\overrightarrow{w} = [1, 1]$. Choose the bias $\beta = -\frac{3}{2}$.
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{AND}
+\end{minipage}
+Then, $z = \overrightarrow{w} \cdot \overrightarrow{X} + \beta = X_1 + X_2 - \frac{3}{2}$. The output layer can contain the heaviside function as its activation $g(z)$. Now, we verify that each of the four points is correctly classified:
+$$(0, 0)^T: z = -\frac{3}{2}, g(z) = 0 \hspace{5mm} (0, 1)^T: z = -\frac{1}{2}, g(z) = 0$$
+$$(1, 0)^T: z = -\frac{1}{2}, g(z) = 0 \hspace{5mm} (1, 1)^T: z = \frac{1}{2}, g(z) = 1$$
+\textbf{OR Boolean}\\
+\vspace{2mm}
+This time, the OR$(X_1, X_2)$ boolean returns true if at least one of $X_1, X_2$ is true. The truth table is now:
+
+\begin{center}
+\begin{tabular}{|c|r|r|r|}
+	\hline
+	 $X_1$ & $X_2$ & $\text{OR}(X_1, X_2)$ \\\hline
+	T & T & T \\\hline
+	T & F & T  \\\hline
+	F & T & T \\\hline
+	F & F & F  \\\hline
+\end{tabular}
+\end{center}
+
+Suppose we wanted to construct a decision boundary for the set of points
+$$\lbrace (0, 0)^T, (0, 1)^T, (1, 0)^T, (1, 1)^T \rbrace$$
+using a neural network, containing one hidden layer.\\
+
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+Similarly, we need only a linear decision boundary to classify these points. We can keep $\overrightarrow{w} = [1, 1]$ from the previous example, but this time, let $\beta = -\frac{1}{2}$. The output layer will use the heaviside function as its activation. One can verify that the four points are appropriately assigned to their output.
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{OR}
+\end{minipage}
+
+\textbf{XOR Boolean}\\
+\vspace{2mm}
+The XOR($X_1, X_2$) booelan returns true if only one of $X_1, X_2$ is true. The truth table is now:
+\begin{center}
+\begin{tabular}{|c|r|r|r|}
+	\hline
+	 $X_1$ & $X_2$ & $\text{XOR}(X_1, X_2)$ \\\hline
+	T & T & F \\\hline
+	T & F & T  \\\hline
+	F & T & T \\\hline
+	F & F & F  \\\hline
+\end{tabular}
+\end{center}
+Once again, let us design a neural network that successfully classifies the four points
+$$\lbrace (0, 0)^T, (0, 1)^T, (1, 0)^T, (1, 1)^T \rbrace .$$
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+This time, we observe that a linear decision boundary is impossible. A line cannot divide the plane without generating some sort of false positive. This is to say that generating a region that contains both (0, 1) and (1, 0) will also contain (0, 0) or (1, 1). 
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.99\textwidth]{XOR}
+\end{minipage}
+We consider a neural network with an input layer (2 neurons), hidden layer using ReLU (2 neurons), and output layer using the sigmoid function (1 neuron).\\
+\vspace{1mm}
+Let $A^{(1)} = g_1 (z) = \text{max}(0, W_1 X + \beta_1)$, where $W_1$ and $\beta_1$ are the weights and biases given by
+$$W_1 = \begin{pmatrix}
+-1 & 1\\
+1 & -1\\
+\end{pmatrix}, \hspace{5mm} \beta_1 = \begin{pmatrix}
+0\\
+0\\
+\end{pmatrix}$$ 
+Let $y = g_2 (W_2 A^{(1)} + \beta_2)$, where $W_2$ and $\beta_2$ are the weights and bias given by
+$$W_2 = \begin{pmatrix}
+1 & 1
+\end{pmatrix} \hspace{5mm} \beta_2 = -\frac{1}{2}$$
+and $g_2 (z)$ is the sigmoid function. Then, for each of the following four points:
+$$(0, 0)^T \Longrightarrow A^{(1)} = g_1 (z) = (0 \hspace{3mm} 0)^T \Longrightarrow y = g_2 \left(-\frac{1}{2}\right) \approx 0.38 \to \text{ False.}$$
+$$(0, 1)^T \Longrightarrow A^{(1)} = g_1 (z) = (0 \hspace{3mm} 1)^T \Longrightarrow y = g_2 \left(\frac{1}{2} \right) \approx 0.62 \to \text{ True.}$$
+$$(1, 0)^T \Longrightarrow A^{(1)} = g_1 (z) = (1 \hspace{3mm} 0)^T \Longrightarrow y = g_2 \left(\frac{1}{2} \right) \approx 0.62 \to \text{ True.}$$
+$$(1, 1)^T \Longrightarrow A^{(1)} =  g_1 (z) = (0 \hspace{3mm} 0)^T \Longrightarrow y = g_2 \left(-\frac{1}{2} \right) \approx 0.38 \to \text{ False.}$$
+Here $A^{(1)}$ contains two hidden layer activations (neurons)$-A_1^{(1)}$ and $A_2^{(1)}-$generated by $W_1, \beta_1$. The following diagram summarizes the neural network we just created!
+\end{flushleft}
+\begin{center}
+\includegraphics[width = 0.9\textwidth]{nnxor}
+\end{center}
+\begin{flushleft}
+The superscripts $(1), (2)$ correspond to which layer we are sending the weights to. The weights $w_{11}^{(1)}, w_{12}^{(1)}$ are the weights for $X_1$ and $w_{21}^{(1)}, w_{22}^{(2)}$ are the weights for $X_2$ in the first hidden layer. These are the elements stored in $W_1$. Likewise, $w_{1}^{(2)}, w_{2}^{(2)}$ are the weights for $A_1, A_2$ in the output layer, stored in the vector $W_2$. There is one bias (or vector of biases) that connect to each activation.\\
+
+\vspace{2mm}
+For this neural network, there are [(2 weights)(2 input neurons) + 2 biases] + [(2 hidden layer neurons)(1 weight) + 1 bias] = 9 total parameters.
+
+\subsection{Gradient Descent and Backpropagation}
+The previous section gave us an idea of how to design small neural networks with 100\% accuracy. However, fitting large neural networks is somewhat complex. We provide a brief overview of the steps:
+\vspace{2mm}
+\begin{itemize}
+\item{Run your model with an initial set of weights, biases, and activation functions. This is what we did in the previous section, and is known as \textit{forward feeding}$-$information flows from the input layer and eventually into the output layer.\\
+\vspace{2mm}}
+\item{Compute the aggregate error between predicted and actual responses using a \textit{loss function}.\\
+\vspace{2mm}}
+\item{Run back through the neural network, starting from the output layer, adjusting weights that will minimize the squared error. This is \textit{backpropagation}.\\
+\vspace{2mm}}
+\end{itemize}
+We will apply \textit{gradient descent}$-$an iterative method$-$to minimize our loss function.\\
+\vspace{2mm}
+\textbf{Forward Feeding}\\
+\vspace{2mm}
+For simplicity, we will use a single layer neural network. Forward feeding a regression model $f(x)$ is simply the output
+$$f_{\overrightarrow{w}}(\overrightarrow{x_i}) = \beta_0 + \sum_{k = 1}^K \beta_k g \left(w_{k0} + \sum_{j = 1}^p w_{kj} x_{ij} \right)$$ 
+where $x_i$ is the $i$-th observation and $K$ is the number of neurons in the hidden layer. For a classification model, we can use the softmax function
+$$f_i (x) = P(y = i \hspace{1mm} | \hspace{1mm} X = x) = \frac{e^{z_i}}{\sum_{j = 1}^K e^{z_j}}$$
+as our forward feeding model, where $z$ is the linear combination of weights and biases in each class.\\
+\vspace{2mm}
+\textbf{Loss Functions}\\
+\vspace{2mm}
+As mentioned earlier, loss functions measure the total error between our output and what the actual output is. We will denote the loss function as a function of our weights $E(\overrightarrow{w})$.\\
+
+\vspace{2mm}
+For regression models, the loss function is often the mean squared error (MSE):
+$$E(\overrightarrow{w}) = \frac{1}{n} \sum_{i = 1}^n \left(f_{\overrightarrow{w}} (\overrightarrow{x_i}) - y_i \right)^2$$
+The optimization problem to be solved is one that finds a $\overrightarrow{w}$ minimizing $E$.\\
+\vspace{2mm}
+For classification problems, the choice for $E$ is one that maximizes $P(\text{all } y_i \hspace{1mm} | \hspace{1mm} \text{all } X_i )$. Mathematically, the optimization problem can be expressed as solving
+$$\underset{\overrightarrow{w}}{\text{argmax}} \prod_{j = 1} \prod_{y_i = j} P(j | X_0) = \prod_{i = 1}^n P(y_i | X_i) = \underset{\overrightarrow{w}}{\text{argmax}} \log \left(\prod_{j = 1} \prod_{y_i = j} P(j | X_0) \right) $$
+$$ = \underset{\overrightarrow{w}}{\text{argmax}} \sum_{j = 1} \sum_{i: y_i = j} \log f_j (x_j)$$
+This can be translated to the minimum by putting a negative sign:
+$$ = E \left(\overrightarrow{w} \right) = \underset{\overrightarrow{w}}{\text{argmin}} - \sum_{j = 1} \sum_{i: y_i = j} \log f_j (x_j)$$
+The loss function for a classification problem is known as the \textit{cross-entropy loss} function. Recall that $f_j (x_j)$ is the softmax function.\\
+\vspace{2mm}
+\textbf{Gradient Descent}\\
+\vspace{2mm}
+Recall that the derivative of $E$ along a direction $\overrightarrow{V}$ is denoted by $\nabla_{\overrightarrow{V}} E$, or the \textit{gradient}. Let $\eta > 0$ be the learning rate such that the change in $E$ is modeled by
+$$E\left(\overrightarrow{w} + \eta \overrightarrow{V} \right) - E \left(\overrightarrow{w} \right) \approx \left(\nabla E(\overrightarrow{w}) \cdot \overrightarrow{V} \right) \eta$$
+Here $\overrightarrow{w} + \eta \overrightarrow{V}$ is the small change in $\overrightarrow{w}$ while moving in the direction of $\overrightarrow{V}$, and so the change in $E$ also moves in the direction of $\overrightarrow{V}$. The equation is derived from the definition of a \textit{directional derivative}
+$$\lim_{\eta \to 0} \frac{E\left(\overrightarrow{w} + \eta \overrightarrow{V} \right) - E \left(\overrightarrow{w} \right)}{\eta} = \nabla E(\overrightarrow{w}) \cdot \overrightarrow{V}$$
+Therefore, the best direction to minimize $E$ is the negative gradient direction:
+$$\overrightarrow{V} = -\frac{\nabla E}{|\nabla E|}.$$
+The procedure for gradient descent, in practice, is pretty straightforward:\\
+\vspace{2mm}
+\begin{enumerate}
+\item{Initialize a reasonable, random set of weights $\overrightarrow{w}$.\\
+\vspace{2mm}}
+\item{Compute $\nabla E(\overrightarrow{w})$.\\
+\vspace{2mm}}
+\item{Set $\overrightarrow{w} = \overrightarrow{w} - \eta \nabla E(\overrightarrow{w})$.\\
+\vspace{2mm}}
+\item{Repeat steps 1-3 until the change in loss function goes below a certain threshold$-$until you cannot go down any further$-$or when you go over the number of iterations you have set.\\}
+\end{enumerate}
+\vspace{2mm}
+Generally, we set $\eta$, the hyperparameter, to a small number (i.e. $10^{-2}$) and the threshold to be a difference of less than $10^{-4}$ or $10^{-5}$. Shown below are examples of gradient descent in 2D and 3D cases.\\
+\begin{center}
+\includegraphics[width = 0.9\textwidth]{graddes2d}
+\includegraphics[width = 0.8\textwidth]{graddes3d}
+\end{center}
+Some remarks about gradient descent:\\
+\vspace{2mm}
+\begin{itemize}
+\item{We compute $\nabla E$ through backpropagation.\\
+\vspace{2mm}}
+\item{If we make $\eta$ too large, then we may overshoot and have divergence. If $\eta$ is too small, then the computational cost grows larger.\\
+\vspace{2mm}}
+\item{We cannot say that the minimum we find is indeed the global minimum. It will be a local minimum at worst, but is there a way to fall into the global minimum?\\
+\vspace{2mm}}
+\end{itemize}
+The answer to the last item uses \textit{stochastic gradient descent}, where we try to ``force" our weights out of a local min and into another, seeing if it is further down than the one we previously found. We add randomness/diffusion to our gradient descent model:
+$$\overrightarrow{w} = \overrightarrow{w} - \underbrace{\eta \nabla E(\overrightarrow{w})}_{\text{drift}} + \underbrace{\mathcal{G}}_{\text{diffusion}}, \hspace{5mm} \mathcal{G} \sim \text{Gauss}(0, \sigma)$$
+Here an initial choice of $\overrightarrow{w}$ is not too important; however, we should randomize it to some extent so it is not uniform.\\
+\vspace{2mm}
+\textbf{Backpropagation}\\
+\vspace{2mm}
+So far, we have discussed forward feeding, our loss functions, and gradient descent. The final step in finalizing our neural network is \textit{backpropagating} through our network, adjusting the weights that truly minimize our loss function $E$.\\
+\vspace{2mm}
+The computation for backpropagation is quite heavy, so we will stick to backpropagating a regression neural network which uses MSE as the loss function. Also, we will assume a single neuron in each layer.\\
+\begin{center}
+\includegraphics[width = 0.55\textwidth]{backprop}
+\end{center}
+Think about how $\textcolor{re}{E_0}$ is computed. We combine the activation from the previous layer and the weights and bias in the current layer to obtain $\textcolor{gre}{z^{(L)}}$. Then, plug in $\textcolor{gre}{z^{(L)}}$ into the activation $A^{(L)}$.  We use the difference between $A^{(L)}$ and $\textcolor{yel}{y}$ to get the loss $\textcolor{re}{E_0}$! Obviously, $A^{(L - 1)}$ is inspired by the previous activation, weights $\textcolor{blu}{w^{(L - 1)}}$, bias $\textcolor{pin}{\beta^{(L - 1)}}$, and so forth, but let us only consider the elements in the diagram.\\
+\vspace{2mm}
+The idea to determine the sensitivity of $\textcolor{re}{E_0}$ with small perturbations in $\textcolor{blu}{w^{(L)}}$. Or, more precisely,
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w^{(L)}}}$$
+We note that a small perturbation in $\textcolor{blu}{w^{(L)}}$ will cause some change in $\textcolor{gre}{z^{(L)}}$, or $\textcolor{gre}{\partial z^{(L)}}$, which in turn, causes a change in $A^{(L)}$ ($\partial A^{(L)}$), and ultimately influencing $\textcolor{re}{E_0}$ ($\textcolor{re}{\partial E_0}$)! The change in loss can ultimately be represented as a product of ratios as we go down the sequence
+
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w^{(L)}}} = \frac{\textcolor{gre}{\partial z^{(L)}}}{\textcolor{blu}{\partial w^{(L)}}} \frac{\partial A^{(L)}}{\textcolor{gre}{\partial z^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A^{(L)}}$$
+This is the chain rule! Now, we compute the relevant derivatives. As we mentioned earlier, we are using the loss function for a regression problem which is the mean squared error. So, 
+$\textcolor{re}{E_0} = \left(A^{(L)} - \textcolor{yel}{y} \right)^2$ implies that
+
+$$\frac{\textcolor{re}{\partial E_0}}{\partial A^{(L)}} = 2\left(A^{(L)} - \textcolor{yel}{y} \right)$$
+We express $A^{(L)}$ as $A^{(L)} = g \left(\textcolor{gre}{z^{(L)}} \right)$, so
+$$\frac{\partial A^{(L)}}{\textcolor{gre}{\partial z^{(L)}}} = g'\left(\textcolor{gre}{z^{(L)}} \right)$$
+
+Lastly, $\textcolor{gre}{\partial z^{(L)}} = \textcolor{blu}{\partial w^{(L)}} A^{(L - 1)} + \textcolor{pin}{\beta^{(L)}}$, so
+$$\frac{\textcolor{gre}{\partial z^{(L)}}}{\textcolor{blu}{\partial w^{(L)}}} = A^{(L - 1)}$$
+Therefore, the change in the loss with the weights is the product
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w^{(L)}}} = 2A^{(L - 1)} g'\left(\textcolor{gre}{z^{(L)}} \right) \left(A^{(L)} - \textcolor{yel}{y} \right).$$
+As given by the diagram, this is just one iteration of backpropagation. We compute the change in loss function $\textcolor{re}{\partial E_0}$ over each training example. If there are $n$ observations, then the aggregate change in loss is
+$$\frac{\textcolor{re}{\partial E}}{\textcolor{blu}{\partial w^{(L)}}} = \frac{1}{n} \sum_{k = 0}^{n - 1} \frac{\textcolor{re}{\partial E_k}}{\textcolor{blu}{\partial w^{(L)}}}.$$
+What we derived here is one half of $\textcolor{re}{\nabla \partial E_0}$. Recall that
+$$\textcolor{re}{\nabla \partial E_0} = \begin{pmatrix}
+\frac{\textcolor{re}{\partial E}}{\textcolor{blu}{\partial w^{(1)}}}\\
+\frac{\textcolor{re}{\partial E}}{\textcolor{pin}{\partial \beta^{(1)}}}\\
+\vdots\\
+\frac{\textcolor{re}{\partial E}}{\textcolor{blu}{\partial w^{(L)}}}\\
+\frac{\textcolor{re}{\partial E}}{\textcolor{pin}{\partial \beta^{(L)}}}\\
+\end{pmatrix}$$
+We also needed to find the change in loss with respect to the biases. Just apply the chain rule again:
+
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{pin}{\partial \beta^{(L)}}} = \frac{\textcolor{gre}{\partial z^{(L)}}}{\textcolor{pin}{\partial \beta^{(L)}}} \frac{\partial A^{(L)}}{\textcolor{gre}{\partial z^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A^{(L)}}$$
+Since $\displaystyle \frac{\textcolor{gre}{\partial z^{(L)}}}{\textcolor{pin}{\partial \beta^{(L)}}} = 1$,
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{pin}{\partial \beta^{(L)}}} = 2g'\left(\textcolor{gre}{z^{(L)}} \right) \left(A^{(L)} - \textcolor{yel}{y} \right).$$
+Similarly, we can find $\textcolor{re}{\partial E_0}$ with respect to the previous activation function.\\
+We would have the expression
+$$\frac{\textcolor{re}{\partial E_0}}{\partial A^{(L - 1)}} = \frac{\textcolor{gre}{\partial z^{(L)}}}{\partial A^{(L - 1)}} \frac{\partial A^{(L)}}{\textcolor{gre}{\partial z^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A^{(L)}}$$
+
+The derivative $\displaystyle \frac{\textcolor{gre}{\partial z^{(L)}}}{\partial A^{(L - 1)}} = \textcolor{blu}{w^{(L)}}$, which gives us
+$$\frac{\textcolor{re}{\partial E_0}}{\partial A^{(L - 1)}} = 2\textcolor{blu}{w^{(L)}}g'\left(\textcolor{gre}{z^{(L)}} \right) \left(A^{(L)} - \textcolor{yel}{y} \right).$$
+
+Now, we can just iterate the same chain rule idea backwards to see how sensitive the loss function is to previous weights and biases. It is one long-winded expression of the chain rule, multiplying a lot of ratios!
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w^{(1)}}} = \frac{\textcolor{gre}{\partial z^{(L)}}}{\textcolor{blu}{\partial w^{(L)}}} \frac{\partial A^{(L)}}{\textcolor{gre}{\partial z^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A^{(L)}} \cdots \frac{\textcolor{gre}{\partial z^{(1)}}}{\textcolor{blu}{\partial w^{(1)}}} \frac{\partial A^{(1)}}{\textcolor{gre}{\partial z^{(1)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A^{(1)}}$$
+In fact, we can easily generalize this to layers with additional neurons! We need only add subscripts $k$ and $j$ to represent the $j$-th neuron in layer $L$ and $k$-th neuron in the previous layer $L - 1$.
+\begin{center}
+\includegraphics[width = 0.6\textwidth]{backprop2}
+\end{center}
+The loss function for layer $L$ is basically the same, now adding subscripts to account for each neuron.
+$$\textcolor{re}{E_0} = \sum_{j = 0}^{n_L - 1} \left(A_j^{(L)} - \textcolor{yel}{y_j} \right)^2$$
+We also add subscripts to represent the weights connecting the $k$-th neuron to the $j$-th neuron as $\textcolor{blu}{w_{jk}^{(L)}}$. This gives us a new expression for $\textcolor{gre}{z_j^{(L)}}$ and $A_j^{(L)}$:
+$$\textcolor{gre}{z_j^{(L)}} = \textcolor{blu}{w_{j0}^{(L)}}A_0^{(L - 1)} + \textcolor{blu}{w_{j1}^{(L)}}A_1^{(L - 1)} + \textcolor{blu}{w_{j2}^{(L)}}A_2^{(L - 1)} + \textcolor{pin}{\beta_j^{(L)}}$$
+$$A_j^{(L)} = g\left(\textcolor{gre}{z_j^{(L)}}\right)$$
+More generally, if layer $L - 1$ has $K$ neurons
+$$\textcolor{gre}{z_j^{(L)}} = \textcolor{pin}{\beta_j^{(L)}} + \sum_{k = 1}^{K} \textcolor{blu}{w_{jk}^{(L)}}A_k^{(L - 1)}$$
+The chain rule representations for $\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w_{jk}^{(L)}}}, \frac{\textcolor{re}{\partial E_0}}{\textcolor{pin}{\partial \beta_j^{(L)}}}$ follow immediately:
+$$\frac{\textcolor{re}{\partial E_0}}{\textcolor{blu}{\partial w_{jk}^{(L)}}} = \frac{\textcolor{gre}{\partial z_j^{(L)}}}{\textcolor{blu}{\partial w_{jk}^{(L)}}} \frac{\partial A_j^{(L)}}{\textcolor{gre}{\partial z_j^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A_j^{(L)}}, \hspace{5mm} \frac{\textcolor{re}{\partial E_0}}{\textcolor{pin}{\partial \beta_j^{(L)}}} = \frac{\textcolor{gre}{\partial z_j^{(L)}}}{\textcolor{pin}{\partial \beta_j^{(L)}}} \frac{\partial A_j^{(L)}}{\textcolor{gre}{\partial z_j^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A_j^{(L)}}$$
+We do need to make a slight modification for $\frac{\textcolor{re}{\partial E_0}}{\partial A_k^{(L - 1)}}$.  Since we sum over $n_L - 1$ for the $\textcolor{re}{E_0}$ and $A_k^{(L - 1)}$ contributes to $\textcolor{re}{E_0}$, we must sum over layer $L$ for the derivative, or more precisely:
+
+$$\frac{\textcolor{re}{\partial E_0}}{\partial A_k^{(L - 1)}} = \sum_{j = 0}^{n_L - 1} \frac{\textcolor{gre}{\partial z_j^{(L)}}}{\partial A_k^{(L - 1)}} \frac{\partial A_j^{(L)}}{\textcolor{gre}{\partial z_j^{(L)}}} \frac{\textcolor{re}{\partial E_0}}{\partial A_j^{(L)}}$$
+
+Remember that we use $j$ for layer $L$ and $k$ for $L - 1$; it is easy to get the notation confused.\\
+\vspace{2mm}
+Once we know how sensitive the loss function is with respect to the activations in $L - 1$, we can repeat this process for all of the weights and biases feeding into that layer.\\
+\vspace{2mm}
+That's backpropagation$-$the powerhouse that drives deep learning!\\
+\vspace{2mm}
+For each iteration of backpropagation, since each weight and bias needs an update, we compute as many partial derivatives of the loss function as there are parameters in our neural network.\\
+\vspace{2mm}
+Successful neural networks always follow the procedure laid out in this chapter. The math and notation itself is quite tedious, but putting in the hard work leads to a truly remarkable ending. Before we conclude neural networks, we provide one example which follows the steps we outlined throughout the chapter.\\
+\begin{example}{}{backpropex}
+Adapt the following description of the backpropagation algorithm.\\
+
+\begin{itemize}
+\item{Each training example is a pair of the form $\langle \overrightarrow{x}, \overrightarrow{t} \rangle$, where $\overrightarrow{x}$ is the vector of network input values, and $\overrightarrow{t}$ is the target vector values.}
+\item{$\eta$ is the learning rate.}
+\item{$n_{\text{in}}$ is the number of network inputs, $n_{\text{hidden}}$ the number of units in the hidden layer, and $n_{\text{out}}$ the number of output values.}
+\item{The input from unit $i$ into unit $j$ is $x_{ji}$ and the weight from unit $i$ to unit $j$ is $w_{ji}$.}
+\item{Assume one hidden layer, use ReLU as the activation function in the hidden layer, do not use an activation function for the output layer, and use squared-error as the loss function.\\}
+\end{itemize}
+
+\vspace{2mm}
+Initialize all network weights to small random numbers (e.g., between $-0.05$ and 0.05). Set $\eta$ to be small, say $\eta = 10^{-2}$. Repeat the following steps until the termination condition is met:
+\vspace{2mm}
+For each $\langle \overrightarrow{x}, \overrightarrow{t} \rangle$ in training-examples,
+\begin{enumerate}[label = (\alph*)]
+\item{Input the instance $\overrightarrow{x}$ to the hidden layer: 
+$$a_j = \text{ReLU} \left(\sum_i w_{ji} x_i \right) = \text{max} \left(0, \sum_{i} w_{ji} x_i \right)$$}
+\item{Since there is no activation function for the output layer, we just have
+$$o_k = \sum_j w_{kj} a_j.$$
+This completes forward feeding.\\
+\vspace{2mm}}
+\item{To begin backpropagation, compute the error for the output later. Let $\delta_k = \frac{\partial E}{\partial o_k}$. Then,
+$$E = \sum_k (o_k - t_k)^2 \Longrightarrow \delta_k \longleftarrow \frac{\partial E}{\partial o_k} = 2(o_k - t_k)$$}
+\item{The derivative of the ReLU function is
+$$\frac{\partial}{\partial a_j} \text{ReLU} (a_j) = \begin{cases}
+1 & \text{ if } a_j > 0\\
+0 & \text{ if } a_j \geq 0\\
+\end{cases}  $$ 
+The error term for the hidden layer neuron is
+$$\delta_j = \frac{\partial E}{\partial a_j} = \frac{\partial E}{\partial o_k} \frac{\partial o_k}{\partial a_j} \frac{\partial a_j}{\partial \text{ReLU}(a_j)} = \sum_k \delta_k w_{kj} $$
+Therefore,
+$$\delta_j \longleftarrow \begin{cases}
+\sum_k w_{kj} \delta_k & \text{ if } a_j > 0\\
+0 & \text{ otherwise }\\
+\end{cases}$$}
+\pagebreak
+\item{Update the output layer weights
+$$w_{kj} \longleftarrow w_{kj} - \eta \delta_k a_j$$}
+\item{Update the hidden layer weights
+$$w_{ji} \longleftarrow w_{ji} - \eta \delta_j x_i$$
+This completes backpropagation.}
+\end{enumerate}
+\end{example}
 
 \pagebreak
 \section{Decision Trees and Ensemble Methods}
 We have looked at various supervised learning models$-$kNN, linear/logistic models, Naive Bayes, LDA/QDA, Neural Networks$-$each with their own spin on classification and regression problems. Now, we consider an approach that has a similar concept to kNN. Consider the usual setup: given a set of data $\lbrace (x_i, y_i) \rbrace$, can we predict where $y$ falls on new data?\\
 \subsection{Decision Trees}
-This time, we will predict $y$ based on nested \textit{if-else} statements or \textit{claim}. Or, more plainly, an observation will follow a trajectory based on whether it is lower than or above certain numerical quantities. For instance, let's say we want to predict whether a student gets admitted into grad school. We can classify criteria accordingly:\\
+This time, we will predict $y$ based on nested \textit{if-else} statements or \textit{claims}. Or, more plainly, an observation will follow a trajectory based on whether it is lower than or above certain numerical quantities. For instance, let's say we want to predict whether a student gets admitted into grad school. We can classify criteria accordingly:\\
 \vspace{2mm}
 \begin{itemize}
 \item{Primary claim: Move left if the student's undergraduate GPA is $\leq 3.5$ (1), and right if it is $>3.5$ (2).}
@@ -375,7 +765,7 @@ We can structure our findings as such:\\
 \includegraphics[width = 0.6\textwidth]{dtree1}
 \end{center}
 \begin{flushleft}
-The resulting diagram is what we call a \textit{decision tree}. It uses a sequence of decisions to partition the $x$-space into $M$ regions$-R_1, R_2, \cdot \cdot \cdot , R_M$. Each nodes $N_i$ are associated with a region $R_i '$ in said $x$-space alongside a decision $D_i$, except ones at the end. We define these nodes \textit{leaves}, or \textit{terminal nodes}, as those without descendants or further decisions/partitions.\\
+The resulting diagram is what we call a \textit{decision tree}. It uses a sequence of decisions to partition the $x$-space into $M$ regions$-R_1, R_2, \cdot \cdot \cdot , R_M$. Each nodes $N_i$ are associated with a region $R_i $ in said $x$-space alongside a decision $D_i$, except ones at the end. We define these nodes \textit{leaves}, or \textit{terminal nodes}, as those without descendants or further decisions/partitions.\\
 
 \begin{minipage}[t]{0.68\linewidth}\vspace{0pt}
 Taking the decision tree to the right, $N_3, N_4, N_6, N_7$ are leaves. $D_i$ are the decisions corresponding to the nodes $N_i$. Therefore, there are three decision nodes: $D_1$, $D_2$, and $D_5$ for the nodes $N_1, N_2, N_5$. If an observation fails to satisfy a claim, then we denote it as $\overline{D}_i$. Say an observation satisfies the claims $D_1$ and $D_5$ but does not satisfy $D_2$. Then the region $R_2$ (node $N_6$) is the set $\lbrace x: D_1, \overline{D}_2, D_5 \rbrace$.\\
@@ -397,7 +787,7 @@ Such a classification problem could be a (over)simplified heuristic for an admis
 \vspace{2mm}
 To further simplify the problem, suppose we no longer want to use club participation as a predictor and only use GPA and work experience in our model. How can we draw each region in the $x$-plane?\\
 \vspace{2mm}
-Suppose $x^{1}$ measures GPA and $x^{(2)}$ measures work experience. Then we are concerned with the claims $x^{(1)} \leq 3.5$ and $x^{(2)} \leq 2$ if the first claim is true and $x^{(2)}$ if false.\\
+Suppose $x^{(1)}$ measures GPA and $x^{(2)}$ measures work experience. Then we are concerned with the claims $x^{(1)} \leq 3.5$ and $x^{(2)} \leq 2$ if the first claim is true and $x^{(2)}$ if false.\\
 \vspace{1mm}
 (See next page)\\
 \pagebreak
@@ -456,7 +846,7 @@ In more complex cases, it may not be feasible to check all possible combinations
 $$R_1 ^{(j, s)} = \lbrace x | x_j < s \rbrace , \hspace{5mm} R_i^{(j, s)} = \lbrace x | x_j \geq s \rbrace$$
 Then, we minimize
 $$\sum_{i: x_i \in R_1 ^{(j, s)}} (y_i - \hat{y} R_i )^2 + \sum_{i: x_i \in R_2^{(j, s)}} (y_i - \hat{y}R_2 )^2$$
-This is called \textit{recursive learning splitting}.\\
+This is known as the \textit{greedy algorithm} since it makes the best local decision without considering future splits.\\
 \vspace{2mm}
 \textit{Remark}: For \textbf{classification} models, we take the majority vote in each region.\\
 \vspace{2mm}
@@ -503,16 +893,182 @@ $$\text{RSS}_1 = (5 - 6)^2 + (7 - 6)^2 = 2$$
 For $R_2$:
 $$\text{RSS}_2 = \left(-1 - \frac{1}{2} \right)^2 + \left(2 - \frac{1}{2} \right)^2 = 2.25 + 2.25 = 4.5$$
 For $R_3$:
-$$\text{RSS}_3 = (8 - 8)^2 = 0$$
+$$\text{RSS}_3 = (-8 + 8)^2 = 0$$
 The total RSS is therefore $\text{RSS}_1 + \text{RSS}_2 + \text{RSS}_3 = 2 + 4.5 + 0 = 6.5$.
 \end{example}
 Intuitively, if similar outputs are in the same region, we obtain a better cut.\\
 \vspace{2mm}
 Decision trees are more likely to overfit our training data, especially if we choose a greater depth (more decisions and nodes). In summary, they are sensitive to training data which leads to high variance and low bias. In a practical setting, decision boundaries for decision trees are nonlinear, which poses an advantage compared to a standard linear regression model. While we used linear boundaries in the previous examples, note that decision boundaries are typically \textbf{non-linear} and \textbf{non-parametric}.\\
 \subsection{Random Forests}
-The goal of this section is to produce a model that tries to solve the overfitting dilemma that decision trees are prone to.
+The goal of this section is to produce a model that tries to solve the overfitting dilemma that decision trees are prone to.\\
+\vspace{2mm}
+Decision trees overfit test data due to their large variance. Consider a new idea: what if we construct multiple trees and take the average? Let there be $n$ independent observations $z_1, \cdot \cdot \cdot, z_n$ following a normal distribution of mean 0 and variance $\sigma^2$. Then,
+
+$$\overline{z} = \frac{1}{n}\sum_{i = 1}^n z_i, \hspace{5mm} \text{Var}\left(\overline{z}\right) = \text{Var} \left(\frac{1}{n} \sum z_i \right) = \frac{1}{n^2} \sum_{i = 1}^n \text{Var} z_i$$
+$$ = \frac{1}{n^2} \sum_{i = 1}^n \sigma^2 = \frac{\sigma^2}{n}$$
+
+Hence, if we average the predictions then the end results will have low variance (i.e. constructing multiple trees using different training set). We construct $\hat{f}^{(1)}, \hat{f}^{(2)}, \cdot \cdot \cdot, \hat{f}^{(B)}$ trees. Then,
+
+$$\hat{f}(x) = \frac{1}{B} \sum_{b = 1}^B \hat{f}^{(b)} (x)$$
+
+This approach is called \textit{bagging}.\\
+\vspace{2mm}
+While this helps fix overfitting to some extent, we can make some more restrictions. Instead of randomly choosing one of $p$ features to split, choose one out of $m$ features such that $m < p$. A fresh sample of $m$ predictors is taken at each split. This is a \textit{random forest}, which notably has less variance than bagging \text{and} individual decision trees. For regression problems, we fit many trees and take an average of their predictions, and for classification problems we take the majority vote.\\
+
+\vspace{2mm}
+\textit{Remark}: A common choice for $m$ is $\sqrt{p}$.\\
+\vspace{2mm}
+In summary, decision trees work great on training data, but tend to capture the noise on test data and overfit as a result. Random forests solve this problem by combining bootstrapping, bagging, and randomness to reduce variance and capture less noise on test data.
+
+\begin{aside}
+\textit{Aside}: While random forests are often sufficient enough in modeling data with high accuracy, we impose a new method to construct multiple trees sequentially. Here is an overview of the algorithm:\\
+\begin{enumerate}
+\item{Set $\hat{f}(x) = 0, r_i = y_i \hspace{5mm} \forall i$ in training set.}
+\item{For $b = 1, \cdot \cdot \cdot, B$:\\
+\hspace{5mm} (a) Fit a tree with $d$ splits to that training data $(X, r_i)$\\
+\hspace{5mm} (b) Update $\hat{f}$: $\hat{f}(x) = \hat{f}(x) + \lambda \hat{f}^{(k)} (x)$\\
+\hspace{5mm} (c) Update the residual $r_i = r_i - \lambda \hat{f}^{(k)} (x_i)$}
+\item{Return
+$$\hat{f}(x) = \sum_{i = 1}^B \lambda \hat{f}^{(b)} (x_i).$$}
+\end{enumerate}
+This is known as \textit{boosting}. It aims to help weaker models with more misclassified samples (larger error/residual) by giving them higher weights, making the next model focus on them. This process is repeated until we have $B$ models. The final prediction is given as the \textit{weighted combination} of the $B$ models. This generally lowers bias because it focuses on predictions that are harder to classify, but can also fall to overfitting if there are too many ``weak" models.\\
+
+While a random forest trains all $B$ models in parallel, boosting emphasizes the improvement of models one-by-one to strengthen the accuracy of the final model. 
+\end{aside}
 
 \pagebreak
 \section{Unsupervised Learning}
+The first five sections introduced methods of supervised learning, where we train a model and use it to predict a label $y$.\\
+\vspace{2mm}
+Recall from Section 1 that in unsupervised learning, there is no label to be predicted. All we have is a dataset $X \in \mathbb{R}^{n \times p}$ and the general task is to explore the \textit{pattern} of data. There are two types of methodologies that both aim to find these trends$-$dimension reduction and clustering.\\
+\vspace{2mm}
+Before proceeding, we assume that \textbf{all features} of $X$ has mean zero. For arbitrary $X$, we can pre-process it by subtracting the mean of each variable for the corresponding column.
+
+\subsection{Principal Component Analysis (PCA)}
+Principal Component Analysis is one of many \textbf{dimension reduction} problems. Given a high-dimensional dataset $X \in \mathbb{R}^{n \times p}$ (or $n$ data in $\mathbb{R}^p$), we want to find a $k$-dimensional subspace that ``preserves" the high-dimensional information. This is obtained through means of an orthogonal projection function.\\
+\vspace{1mm}
+\begin{itemize}
+\item{A naive solution is to randomly pick $k$ components of $X$, but we are going to lose a lot of information this way.\\
+\vspace{1mm}}
+\item{A more reasonable assumption is that our projection function is a linear transformation, where the linear coefficients depends on the ``structure" of the dataset. This is to say that the ``new coordinates" are a linear mapping/combination of ``old coordinates."\\
+\vspace{1mm}}
+\item{Reducing dimensions can help remove features that may contain a lot of redundant information and improve the efficiency and performance of machine learning models.\\
+\vspace{1mm}}
+\end{itemize}
+If you have ever heard of the phrase, ``describe yourself in two words," this is the essence of PCA and dimension reduction! Wanting to say the most about yourself using as fewest words as possible, in the realm of machine learning, translates to: how much can we maximize the information in our dataset using the simplest model possible?\\
+\vspace{2mm}
+We motivate two ways to derive this. The first of which is a more naive approach.\\
+\vspace{2mm}
+\textbf{Lagrange Multipliers}\\
+\vspace{2mm}
+Following the assumptions about $X$ (namely the fact that it is centered), we construct a covariance matrix $C$ which describes the relationship between the features
+$$C = \frac{1}{n} X^T X \in \mathbb{R}^{p \times p} = E\left[X^T X \right]$$
+The goal is to describe the most but say the least about $C$. This is equivalent to finding a $\overrightarrow{v}$ such that the projection of the covariances onto $\overrightarrow{v}$ is the smallest. Mathematically, we\\
+\pagebreak
+\begin{minipage}{0.46\linewidth}\vspace{0pt}
+describe this as
+$$v \in \mathbb{R}^p, ||v|| = 1 \text{ such that }$$
+$$\underset{||\overrightarrow{v}|| = 1}{\text{max}} \overrightarrow{v}^T C\overrightarrow{v}$$
+We can find $\overrightarrow{v}$ through a constraint optimization problem:
+$$\text{max} \underbrace{\overrightarrow{v}^T C\overrightarrow{v}}_{f(v)} \text{ given } ||\overrightarrow{v}|| = 1 = \underbrace{\overrightarrow{v}^T \overrightarrow{v}}_{g(v)}$$
+\end{minipage}
+\begin{minipage}{0.53\linewidth}\vspace{0pt}
+\includegraphics[width = 0.9\textwidth]{projection}
+\end{minipage}
+This is where Lagrange Multipliers come in. The optimization problem satisfies 
+$$\nabla f = \lambda \nabla g \Longrightarrow \mathcal{L}(v) = \nabla f - \lambda \nabla g = 0$$
+We can cheat a little and use the quadratic form of $f(v)$ to say it is technically equal to $\left(\overrightarrow{v} \right)^2 C$.
+$$\nabla f = 2\overrightarrow{v}^TC, \hspace{5mm} \nabla g = 2\overrightarrow{v}^T $$
+$$\Longrightarrow 2\overrightarrow{v}^T C = \lambda 2 \overrightarrow{v}^T \Longrightarrow \overrightarrow{v}^T C = \lambda \overrightarrow{v}^T$$
+Since $C$ is symmetric, the adjoint (or transpose) of $C$ follows $C^T = C$.
+$$C^T \overrightarrow{v} = \lambda \overrightarrow{v} \Longrightarrow C\overrightarrow{v} = \lambda \overrightarrow{v}$$
+This is to say, the \textbf{eigenvectors} of $C$ optimize our covariances, known as the \textbf{principal components}! Note that $C$ is a positive semi-definite matrix, satisfying $\overrightarrow{v}^T C \overrightarrow{v}$, so the eigenvalues will be strictly positive (under the assumption $n > p$, which is almost always the case anyway). We will dive into the interpretation of principal components later, but we introduce a second process of obtaining the same results.\\
+\vspace{2mm}
+\textbf{Singular Value Decomposition}\\
+\vspace{2mm}
+Singular Value Decomposition (SVD) yields a more interpretable conclusion compared to Lagrange multipliers. Recall that for a linear operator $T \in \mathbb{R}^{n \times p}: \mathbb{R}^p \to \mathbb{R}^n$, it can be decomposed into
+$$T = U \Sigma V^T$$
+where $U$ and $V$ are $n \times n$ and $p \times p$ unitary matrices, and $\Sigma$ is a $p \times p$ diagonal matrix containing the \textbf{singular values} ($\sigma$) of $T$. A unique property about unitary matrices shows that they contain orthonormal columns, generating an orthogonal basis of $\mathbb{R}^p \left[v_1, \cdots, v_p \right]$, which will be the basis of the principal components (the important directions). When applying $T$ to an arbitrary vector $\overrightarrow{x}$, then we have
+$$T\overrightarrow{x} = U \Sigma V^T \overrightarrow{x}$$
+We can apply the general idea to our dataset $X \in \mathbb{R}^{n \times p}$, where
+$$X = U \Sigma V^T$$
+Suppose a simple example where $n = 2, p = 2$. What type of transformations are $\Sigma$ and $V^T$? 
+\begin{center}
+\includegraphics[width = 0.8\textwidth]{svdtransformations}
+\end{center}
+We start with the unit circle, where the norm of any vector lying on the circle is equal to 1. $U$ is a rotation matrix; however, the ball will not change form regardless of what $U$ is. Applying $\Sigma$ \textit{squishes} or \textit{stretches} the ball to an ellipse with a major axis of length $\sigma_1$ (larger singular value) and minor axis of length $\sigma_2$. Once again, $V^T$ is a rotation matrix, rotating the ``basis" of the orthogonal singular values (in this illustration, by roughly 45$^{\circ}$).\\
+\vspace{2mm}
+In the context of linear algebra, $U\Sigma$ multiplies different columns in $U$ by the singular values $\sigma_i$'s, and $U\Sigma V^T$ constructs a linear combination of rows in $V^T$ by coefficients in the corresponding coordinate in $U\Sigma$, producing a new orthonormal frame. The matrix product $U \Sigma$ produces the \textbf{scores} of a principal component, or namely the coordinates or positions of the data in the ``new" space. For instance, $\sigma_1$ contains the most information, and this is the typical convention because he singular values in $\Sigma$ are always ordered in descending order: $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_p$.\\
+\vspace{2mm}
+\textbf{Interpretation}\\
+\begin{center}
+\includegraphics[width = 0.6\textwidth]{pcavisual}
+\end{center}
+\vspace{2mm}
+In summary, principal components emphasize the \textbf{direction} of the direction and its \text{score} explains the \textbf{spread} of data, or \textbf{explained variance} in that direction. The \textbf{score} is a transformed coordinates of the data points into the new principal component subspace. With how singular values are obtained, we say the most explained variance is observed in the first principal component and descending with each successive principal component. In other words, the \textbf{explained variance ratio} should decrease with each principal component. Using the plot from the previous page (with $n = 100, k \text{ components } = 2$)\\
+\vspace{2mm}
+\begin{itemize}
+\item{The arrow pointing in the direction of the ``major axis" has the highest explained variance ratio (as given by its magnitude) and thus explains the most information in our data.\\
+\vspace{1mm}}
+\item{The arrow pointing in the direction of the minor axis has the lowest score/explained variance and thus explains the least information in our data.\\
+\vspace{2mm}}
+\end{itemize}
+We could suggest that the data can be further reduced to one dimension$-$that the data is generated along one line (major axis) and the short line (minor axis) merely corresponds to ``noise." For instance, we would be compelled to believe this if the 1st explained variance ratio was 0.98 and the 2nd was 0.02. \\
+\vspace{2mm}
+\textit{Remark 1}: Additionally, because $V$ is unitary, $V^T V = I$ and so
+$$XV = U \Sigma$$
+implying that the projection of the data onto the principal component space spanned by $V$, which rotates the data that has the largest variance. This is equivalent to the score!\\
+\vspace{2mm}
+\textit{Remark 2}: In an unrealistic scenario, if the explained variance ratio is 1.00 for the first principal component, then our data is one-dimensional (line pointing in the direction corresponding to the first vector in the orthogonal basis). Since principal components are generated from an orthogonal basis, each principal component is orthogonal to each other.
+\begin{example}{}{pca}
+\textit{Motivation}: Nowadays, facial recognition is widely used for ID verification, known as Face ID. Apple's innovative discovery in 2017 introduced this technology. Before setting up your ``ID," you are required to take photos of yourself at different angles. For subsequent uses of your phone, accessing it and transactions are often locked behind Face ID as a safety measure. \\
+
+\textit{Problem}: Suppose we have a $64 \times 64$ greyscale image (thought of a point in $\mathbb{R}^{4096}$), which is the ``digital expression" of the person's face, and a dataset of 16 similar pictures (the different angles in this case), explain how we could use PCA to reduce this into a 200-dimensional subspace. Interpret the 200-dimensional subspace in context of the problem and describe a quantitative method that explains why 200 dimensions may be appropriate.\\
+
+\textit{Idea}: We would project the 4096-dimensional vector onto the top 200 principal components, obtaining a 200-dimensional representation of each face, capturing the most significant facial variations while removing noise and redundancy. \\
+
+The 200 principal components span a subspace that contribute to parts of the facial structure (eyes, eyebrows, glasses, lighting), ensuring efficient storage and fast computation. To summarize, lowering  the dimension maintains key characteristics of a person's face while removing unnecessary features.\\
+
+If 200 dimensions gives us at least 95\% \textbf{explained variance}, then this ensures that the reduced subspace still retains most of the information. If we lower our metric for the explained variance too much (i.e. 70\%), we lose more critical identity information, generating more false positives and making it easier for unauthorized users to access anyone's phone.\\
+
+\textit{Conclusion}: This example emphasizes the importance of choosing a reasonable dimension to reduce to and identifying a cutoff for explained variance (balancing security vs. efficiency). With a lower explained variance ratio, we require fewer principal components, blurring the line between individual differences. Therefore, it recognizes different faces as ``similar" and ultimately leads to misclassification.
+\end{example}
+
+\subsection{K-Means Clustering}
+In addition to clustering methods, another typical task in unsupervised learning model is \textbf{clustering}: assigning data samples into several groups, or clusters, based on their similarities. Similar samples should fall in the same cluster and dissimilar samples should be in different clusters.\\
+\vspace{2mm}
+Mathematically, when given a set of observations $X \in \mathbb{R}^{(n \times p)}$, $k$-means clustering aims to partition the $n$ samples into $K$ sets such that $S = S_1, S_2, \cdots, S_K$, $K \leq n$, so as to minimize the within-cluster sum of squares (variance). Or more formally, we wish to find the best partition of groups that \textit{minimize the loss function} of $S$:
+$$\underset{S}{\text{min}} \sum_{i = 1}^K \sum_{x \in S_i} ||x - \mu_i||^2$$
+where $\mu_i$ is the \textbf{cluster centroid} or mean of all points in each $S_i$. The task itself is very difficult; the common approach is in applying Lloyd's algorithm for finding evenly spaced points in Euclidean space. However, the steps are easily streamlined:\\
+\vspace{2mm}
+\begin{itemize}
+\item{Given the current cluster centroid, update the cluster of data according to its nearest cluster centroid (assignment)\\
+\vspace{2mm}}
+\item{Given the cluster assignment, update the cluster centroid by calculating the means within each cluster (update).}
+These steps are realized in the illustration below.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{kmeans1}
+\hspace{1mm}
+\includegraphics[width=0.48\textwidth]{kmeans2}
+\end{figure}
+\end{itemize}
+The cluster centroids for each class, or color, are given by the large circles, with the observations  being the smaller ones. The color for each observation should match the cluster centroid it is closest to. In the first iteration, most observations agree with their closest center. When applying the update step, corrections are made to the previously mismatched observations. By changing color, each class loses and gains new observations, which in turn changes the location of each centroid. Seeing as all observations are now assigned their correct color, we can stop here.\\
+\vspace{2mm}
+Some general conclusions about K-Means clustering:\\
+\vspace{2mm}
+\begin{itemize}
+\item{We also need to determine the number of classes $K$ to stratify the data into. In practice, this is a difficult task that is separable from the algorithm itself. It uses a similar approach of explained variance in PCA, computing how much explained variance is added for each cluster. Once the change is negligible, we count the total number of clusters.\\
+\vspace{2mm}}
+\item{This is not KNN! K-means makes changes within our existing data, whereas KNN is applied on new data and based on its closest points, not by clusters of classes.\\
+\vspace{2mm}}
+\item{As with loss functions in other machine learning models, we are not guaranteed a global minimum. In K-means clustering, a general approach is to randomly run different initializations of the algorithm in parallel and testing which set of partitions yields the smallest loss.\\}
+\end{itemize}
+\pagebreak
+\section{References}
+All diagrams were self-curated. However, some of them were inspired by 3Blue1Brown's playlist on Neural Networks, which is attached below! The notes themselves were also influenced by the textbook: \textit{An Introduction to Statistical Learning with Python.}\\
+\vspace{2mm}
+
+\url{https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi}
 \end{flushleft}
 \end{document}
