@@ -1,29 +1,83 @@
 \documentclass[11pt]{article}
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[fleqn]{amsmath}
+\usepackage[svgnames]{xcolor}
+\usepackage{hyperref}
 \usepackage{float}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{amsthm}
 \usepackage{mathtools}
-\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{dsfont}
 \usepackage{lipsum}    
 \usepackage{nicematrix}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[most]{tcolorbox}
+\usepackage[breakable,theorems,skins]{tcolorbox}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\newtheorem{example}{Example}[section]
+\usepackage{multirow}
+\usepackage[all]{xy}
 \usepackage{tzplot}
+\usepackage{caption}
 \usepackage{pgfplots}
+\usepackage{chngcntr}  
+\usepackage{placeins}
+
+\definecolor{purp}{HTML}{961CEB}
+\definecolor{blu}{HTML}{2F8ADA}
+\definecolor{pin}{HTML}{DE4387}
+\definecolor{gre}{HTML}{2C996C}
+\definecolor{yel}{HTML}{D99215}
+\definecolor{re}{HTML}{E8462F}
+
+\def\exstart{\hangindent\leftmargini\textup{1.}\hspace{\labelsep}}
+
+\newcommand\boldinline[1]{\paragraph{#1}}
+\newcommand\boldsubsection[1]{\subsection*{#1}}
+\newcommand\boldsubsubsection[1]{\subsubsection*{#1}}
+ 
+\newenvironment{enumeratea}{
+	\begin{enumerate}
+	  \renewcommand{\labelenumi}{(\alph{enumi})}}
+	{\end{enumerate}}
+
+
+%Theorems
+\tcbset{
+	defstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt, left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, colback=blue!7!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{orange!75!white}},
+	thmstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=green!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	exercisestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \ \ }},
+	proofstyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{green!50!white}},
+	asidestyle/.style={enhanced, breakable, beforeafter skip balanced=10pt, blanker, borderline west={4pt}{-8pt}{black!50!white}},
+	exercisestyle2/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesubsection.\ \ \ }},
+	exercisestyle4/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercises\ \thesection.\ \ \ }},
+	exercisestyle3/.style={enhanced, breakable, beforeafter skip balanced=10pt, coltitle=black, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\upshape, blanker, borderline west={4pt}{-8pt}{purple!75!white}, title={Exercise\quad}},
+	conjstyle/.style={enhanced, top=3pt, bottom=3pt, colframe=black, coltitle=black, arc=5pt, boxrule=1.5pt,left*=0pt, right*=0pt, theorem style=plain, terminator sign={.\ \ \ }, fonttitle=\bfseries\upshape, fontupper=\slshape, colback=red!12!white, grow sidewards by=8pt, drop fuzzy shadow},
+	}
+
+\tcolorboxenvironment{proof}{breakable,proofstyle}
+
+\newtcbtheorem[number within=section]{defn}{Definition}{defstyle}{defn}
+\newtcbtheorem[use counter from=defn]{example}{Example}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{examples}{Examples}{exstyle}{ex}
+\newtcbtheorem[use counter from=defn]{thm}{Theorem}{thmstyle}{thm}
+\newtcbtheorem[use counter from=defn]{lemm}{Lemma}{thmstyle}{lemm}
+\newtcbtheorem[use counter from=defn]{cor}{Corollary}{thmstyle}{cor}
+\newtcbtheorem[use counter from=defn]{axiom}{Axiom}{defstyle}{axiom}
+\newtcbtheorem[use counter from=defn]{axioms}{Axioms}{defstyle}{axioms}
+\newtcbtheorem[use counter from=defn]{conj}{Conjecture}{conjstyle}{conj}
+
+\newtcolorbox{aside}{asidestyle}
+\newtcolorbox{exercises*}{exercisestyle}
+\newtcolorbox{exercises}{exercisestyle2}
+\newtcolorbox{exercisessec}{exercisestyle4}
+\newtcolorbox{exercise}{exercisestyle3}
+
 \pgfplotsset{compat=newest}
 \usetikzlibrary{arrows,calc,patterns}
 \usepackage{newpxtext,newpxmath}
 \graphicspath{ {./Math 178/} }
-\begin{document}
-\setlist{nolistsep,leftmargin=*}
-\pagestyle{fancy}
-\fancyhead[L]{Ryan Gomberg}
-\fancyhead[C]{Math 178 (Mathematical Machine Learning) Notes}
-\fancyhead[R]{Page \thepage \hspace{0.2mm} of 13}
