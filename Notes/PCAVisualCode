@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+rng = np.random.RandomState(1)
+X = np.matmul(rng.rand(2, 2), rng.randn(2, 200)).T
+fig = plt.figure(dpi=100)
+plt.scatter(X[:, 0], X[:, 1])
+plt.axis('equal');
+
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+pca.fit(X)
+
+def draw_vector(v0, v1, ax=None):
+    ax = ax or plt.gca()
+    arrowprops=dict(arrowstyle='->',
+                    linewidth=2,
+                    shrinkA=0, shrinkB=0)
+    ax.annotate('', v1, v0, arrowprops=arrowprops)
+
+fig = plt.figure(dpi=100)
+plt.scatter(X[:, 0], X[:, 1], alpha=0.2)
+for length, vector in zip(pca.explained_variance_, pca.components_):
+    v = vector * 3 * np.sqrt(length)
+    draw_vector(pca.mean_, pca.mean_ + v)
+plt.axis('equal');
